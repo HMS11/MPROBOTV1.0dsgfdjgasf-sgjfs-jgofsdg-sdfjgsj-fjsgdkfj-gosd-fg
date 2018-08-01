@@ -42,7 +42,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
       m.sendMessage(args)
   });
          if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(":x: **ليس لديك صلاحية للنشر هنا**");
-  const AziRo = new Discord.RichEmbed(:white_check_mark:  تم ارسال البرودكاست ,)   
+  const AziRo = new Discord.RichEmbed(:white_check_mark:)   
   .setColor('RANDOM')
   message.channel.sendEmbed(AziRo);          
 }
