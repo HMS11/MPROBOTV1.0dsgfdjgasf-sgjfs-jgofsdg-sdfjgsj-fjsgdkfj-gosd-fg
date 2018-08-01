@@ -51,7 +51,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 
 
-client.on('message', message => {
+cclient.on('message', message => {
                                 if(!message.channel.guild) return;
                         if (message.content.startsWith('#ping')) {
                             if(!message.channel.guild) return;
@@ -61,12 +61,10 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-            message.reply("**WebSocket:**',api + " ms 📶")
+                        .addField('**PING :**',api + " ms 📶 ")
          message.channel.send({embed:embed});
                         }
                     });
-
-
 
 
 client.login(process.env.BOT_TOKEN);
