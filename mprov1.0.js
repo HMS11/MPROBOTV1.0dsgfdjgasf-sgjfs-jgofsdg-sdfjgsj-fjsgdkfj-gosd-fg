@@ -128,6 +128,7 @@ var unmuteembeddm = new Discord.RichEmbed()
 
 
 client.on('message', async message =>{
+ var prefix = "#";
 const ms = require("ms");
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
