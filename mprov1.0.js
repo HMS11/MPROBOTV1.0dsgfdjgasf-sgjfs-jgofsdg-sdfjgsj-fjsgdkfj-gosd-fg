@@ -51,7 +51,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 
 
-cclient.on('message', message => {
+client.on('message', message => {
                                 if(!message.channel.guild) return;
                         if (message.content.startsWith('#ping')) {
                             if(!message.channel.guild) return;
