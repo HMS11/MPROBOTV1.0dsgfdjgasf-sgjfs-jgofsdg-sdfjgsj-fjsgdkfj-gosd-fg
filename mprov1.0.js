@@ -23,6 +23,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
+  	const prefix = 'T'
 if (message.author.id === client.user.id) return;
 if (message.guild) {
 let embed = new Discord.RichEmbed()
@@ -33,7 +34,6 @@ if (!args[1]) {
 return;
 }
   message.guild.members.forEach(m => {
-    	const prefix = 'T'
 if(!message.member.hasPermission('ADMINISTRATOR')) return;
       var bc = new Discord.RichEmbed()
       .addField('# | الرسالة ', args)
