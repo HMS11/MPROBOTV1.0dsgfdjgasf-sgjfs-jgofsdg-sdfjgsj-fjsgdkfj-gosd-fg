@@ -123,55 +123,40 @@ var unmuteembeddm = new Discord.RichEmbed()
 
 
 
-
-
-
-
-module.exports.run = async (bot, message, args) => {
-
-  //!tempmute @user 1s/m/h/d
-
-  let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-  if(!tomute) return message.reply("Couldn't find user.");
-  if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");
-  let muterole = message.guild.roles.find(`name`, "muted");
-  //start of create role
-  if(!muterole){
-    try{
-      muterole = await message.guild.createRole({
-        name: "muted",
-        color: "#000000",
-        permissions:[]
-      })
-      message.guild.channels.forEach(async (channel, id) => {
-        await channel.overwritePermissions(muterole, {
-          SEND_MESSAGES: false,
-          ADD_REACTIONS: false
-        });
-      });
-    }catch(e){
-      console.log(e.stack);
-    }
+const developers = ["459300517999411218","389136174154907651",""]
+const adminprefix = "#";
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!developers.includes(message.author.id)) return;
+      
+  if (message.content.startsWith(adminprefix + 'setgame playing')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**Playing : ${argresult}**`)
+  } else 
+     if (message.content === (adminprefix + "leaveserver")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(adminprefix + 'setgame watching')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**Watching : ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'setgame listening')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**Listening : ${argresult}**`)
+  } else 
+  if (message.content.startsWith(adminprefix + 'setgame streaming')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.send(`**Streaming : ${argresult}**`)
   }
-  //end of create role
-  let mutetime = args[1];
-  if(!mutetime) return message.reply("You didn't specify a time!");
-
-  await(tomute.addRole(muterole.id));
-  message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
-
-  setTimeout(function(){
-    tomute.removeRole(muterole.id);
-    message.channel.send(`<@${tomute.id}> has been unmuted!`);
-  }, ms(mutetime));
-
-
-//end of module
+  if (message.content.startsWith(adminprefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To , :zap: **${argresult}** `)
+} else
+if (message.content.startsWith(adminprefix + 'setavatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
-
-module.exports.help = {
-  name: "tempmute"
-}
+});
 
 
 
