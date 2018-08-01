@@ -42,8 +42,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
       m.sendMessage(args)
   });
          if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("**PERM Not Founded** :warning:   ");
-
-  message.channel.sendEmbed(AziRo);          
+        
 }
 } else {
   return;
