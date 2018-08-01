@@ -22,7 +22,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-	const prefix = 'T'
+	const prefix = '#'
     if (message.author.id === client.user.id) return;
     if (message.guild) {
    let embed = new Discord.RichEmbed()
