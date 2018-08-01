@@ -61,7 +61,7 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-                        .addField('   ```**WebSocket:**',api + " ms 📶```  ")
+            message.reply("please mention the member")
          message.channel.send({embed:embed});
                         }
                     });
