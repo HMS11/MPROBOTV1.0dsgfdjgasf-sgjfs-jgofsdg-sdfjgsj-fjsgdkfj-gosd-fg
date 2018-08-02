@@ -138,7 +138,7 @@ client.on('message', message => {
   } else  
   if (message.content.startsWith(adminprefix + 'watching')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**STATUS CHANGED : NOW :arrow_forward: WATCHING  :WATCHING:  ** ${argresult}**`)
+      message.channel.send(`**STATUS CHANGED : NOW :arrow_forward: WATCHING  :movie_camera: **  ** ${argresult}**`)
   } else 
   if (message.content.startsWith(adminprefix + 'listening')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
