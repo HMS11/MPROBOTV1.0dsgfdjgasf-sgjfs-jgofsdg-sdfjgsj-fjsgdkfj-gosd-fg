@@ -67,6 +67,8 @@ color: 0x06DF00,
 footer: {
 }};
 }}).then(msg => {msg.delete(3000)});
+                       }
+                    });
 
 client.on('message', message => {
                                 if(!message.channel.guild) return;
