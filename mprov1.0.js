@@ -70,7 +70,7 @@ let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.
 let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
 let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
 reaction1.on("collect", r => {
-message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+message.channel.send(`يتم مسح الشات `).then(m => m.delete(5000));
 var msg;
         msg = parseInt();
 
