@@ -146,7 +146,7 @@ client.on('message', message => {
   } else 
   if (message.content.startsWith(adminprefix + 'streaming')) {
     client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.send(`** ${client.user}! is now streaming ** **${argresult}** `)
+      message.channel.send(`** ${client.user}  STREAMING :streaming: ** **${argresult}** `)
   }
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
