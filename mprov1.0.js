@@ -153,8 +153,8 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-                        .addField('**STREAMING  :space_invader: :**')
                         .addField("**STREAMING  :space_invader: :**","** **")
+                        .addField("**${argresult}**","** **")
          message.channel.send({embed:embed});
                         }
   if (message.content.startsWith(adminprefix + 'setname')) {
