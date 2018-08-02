@@ -437,6 +437,7 @@ client.on("guildMemberAdd", (member) => {
 
 
     client.on('message', message => {
+	      const prefix = '#'
 const Canvas = require("canvas") // npm i canvas
 const fs = require("fs") // npm i fs
  
