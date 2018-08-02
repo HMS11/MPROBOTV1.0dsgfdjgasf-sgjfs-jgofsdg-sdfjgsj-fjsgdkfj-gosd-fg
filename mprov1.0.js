@@ -439,8 +439,8 @@ client.on("guildMemberAdd", (member) => {
 
 
 client.on('guildMemberAdd', member => {
-var message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
-var channel =member.guild.channels.find('name', 'chat-arabjoker')
+ message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
+var channel =member.guild.channels.find('name', 'cileeęo')
 if (!channel) return;
 channel.send({embed : embed});
 });
