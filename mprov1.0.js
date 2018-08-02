@@ -131,15 +131,33 @@ client.on('message', message => {
       
   if (message.content.startsWith(adminprefix + 'playing')) {
     client.user.setGame(argresult);
-      message.channel.send(`**STATUS CHANGED : NOW :arrow_forward: ${argresult}**`)
-  } else 
+          if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('RANDOM')
+                        .addField("**PLAYING :video_game:    **","** **")
+         message.channel.send({embed:embed});
+                        }
+  
      if (message.content === (adminprefix + "leaveserver")) {
     message.guild.leave();        
   } else  
   if (message.content.startsWith(adminprefix + 'watching')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**STATUS CHANGED : NOW :arrow_forward: WATCHING  :movie_camera: **  ** ${argresult}**`)
-  } else 
+         if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('RANDOM')
+                        .addField("**WATCHING :video_camera:   **","** **")
+         message.channel.send({embed:embed});
+                        }
+  
   if (message.content.startsWith(adminprefix + 'listening')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
        if(!message.channel.guild) return;
@@ -149,7 +167,7 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-                        .addField("*LISTENING :musical_score:  **","** **")
+                        .addField("**LISTENING :musical_score:  **","** **")
          message.channel.send({embed:embed});
                         }
   
