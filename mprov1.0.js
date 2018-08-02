@@ -430,7 +430,7 @@ client.on("guildMemberAdd", (member) => {
 **Invited By** :  ${Invite.inviter} `) ;         
  }
             dat[Inv] = Invite.uses;
-                     message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
+
        });
     });
 });
@@ -438,7 +438,12 @@ client.on("guildMemberAdd", (member) => {
 
 
 
-
+client.on('guildMemberAdd', member => {
+var message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
+var channel =member.guild.channels.find('name', 'chat-arabjoker')
+if (!channel) return;
+channel.send({embed : embed});
+});
 
 
 client.login(process.env.BOT_TOKEN);
