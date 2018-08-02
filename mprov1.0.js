@@ -55,8 +55,8 @@ client.on('message', message => {
        const prefix = '#'
    if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
-if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**You Do not have permission** `ADMINISTRATOR`' );
+if(!message.channel.guild) return message.channel.send('**أنت لا تملك الصلاحيات ! :x:**').then(m => m.delete(5000));
+if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**أنت لا تملك الصلاحيات ! :x:** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
 let request = `Requested By ${message.author.username}`;
 message.channel.send(`**هل أنت متأكد من مسح الشات ؟**`).then(msg => {
@@ -75,11 +75,11 @@ var msg;
         msg = parseInt();
 
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-    message.channel.send(`**Deleted CHAT !** `);
+    message.channel.send(`**تم مسح الشات ** `);
 
 })
 reaction2.on("collect", r => {
-message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
+message.channel.send(`**مسح الشات الغي !**`).then(m => m.delete(5000));
 msg.delete();
 })
 })
