@@ -442,6 +442,7 @@ client.on('guildMemberAdd', member => {
     var embed = new Discord.RichEmbed()
     .setThumbnail(member.user.avatarURL)
   .addField("**:arrow_forward:  :calendar_spiral: **" ,member.user.username )
+            .setAuthor(member.user.tag, member.user.avatarURL)
     .setDescription('**أهلا بك في سيرفر سيلو , نتمنى لك وقتا ممتعا !**')
     .setColor('#b465f1')
     .setImage('https://cdn.discordapp.com/attachments/474320484452925490/474716542270177290/backgrounder_2.png')
@@ -471,17 +472,6 @@ client.on('message', message => {
     
 
 
-client.on("guildMemberAdd", function(member) {
-    const wc = member.guild.channels.find("name", "cileeęo")
-        const embed = new Discord.RichEmbed()
-        .setColor('B90C0C')
-        .setAuthor(member.user.tag, member.user.avatarURL)
- .setDescription('***يا مرحبا وسهلاً بضيف لفانا، يزهي بك الأدب العربي وينثر لك أزهار يسقيك من نبع المشاعر وفانا، لين الهلا تثمر على غصونك أطيار. ***')
-.setThumbnail(member.avatarURL)
-  .setImage('https://www.askideas.com/media/13/Welcome-Deers-Sign.jpg')
-        .setTimestamp()
-        return wc.sendEmbed(embed);
-        
-});
+
 
 client.login(process.env.BOT_TOKEN);
