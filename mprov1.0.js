@@ -75,9 +75,7 @@ var msg;
         msg = parseInt();
 
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-    message.channel.send(`**Changing The Avatar To , :zap: ****${argresult}** `);
-   
-      }}).then(msg => {msg.delete(3000)});
+    message.channel.send(`**Deleted CHAT !** `);
 
 })
 reaction2.on("collect", r => {
