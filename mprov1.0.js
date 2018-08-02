@@ -425,7 +425,8 @@ client.on("guildMemberAdd", (member) => {
             var Inv = Invite.code;
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;         
+ channel.send(`**Welcome To Cilęo Server.**
+**Invited By** :  ${Invite.inviter} `) ;         
  }
             dat[Inv] = Invite.uses;
        
