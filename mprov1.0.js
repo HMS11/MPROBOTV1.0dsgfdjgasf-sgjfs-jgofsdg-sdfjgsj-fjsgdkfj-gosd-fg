@@ -154,7 +154,6 @@ client.on('message', message => {
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
                         .addField('**STREAMING  :space_invader: :**')
-                        .addField(' ${argresult} ')
          message.channel.send({embed:embed});
                         }
   if (message.content.startsWith(adminprefix + 'setname')) {
