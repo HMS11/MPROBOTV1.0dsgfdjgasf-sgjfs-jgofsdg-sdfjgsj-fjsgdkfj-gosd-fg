@@ -142,7 +142,16 @@ client.on('message', message => {
   } else 
   if (message.content.startsWith(adminprefix + 'listening')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`****STATUS CHANGED : NOW :arrow_forward: ${argresult}**`)
+       if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('RANDOM')
+                        .addField("*LISTENING :musical_score:  **","** **")
+         message.channel.send({embed:embed});
+                        }
   } else 
   if (message.content.startsWith(adminprefix + 'streaming')) {
     client.user.setGame(argresult, "https://www.twitch.tv/idk");
@@ -153,7 +162,7 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-                        .addField("**STREAMING  :space_invader: ,**","** **")
+                        .addField("**STREAMING  :space_invader: **","** **")
          message.channel.send({embed:embed});
                         }
   if (message.content.startsWith(adminprefix + 'setname')) {
