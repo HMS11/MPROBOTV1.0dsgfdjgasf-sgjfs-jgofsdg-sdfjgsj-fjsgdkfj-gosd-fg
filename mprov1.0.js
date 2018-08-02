@@ -156,8 +156,6 @@ client.on('message', message => {
                         .addField('**PING :**',api + " ms ⚡ ")
          message.channel.send({embed:embed});
                         }
-                    });
-
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
       message.channel.send(`**Changing The Name To , :zap: **${argresult}** `)
