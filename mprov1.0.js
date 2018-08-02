@@ -441,10 +441,10 @@ client.on("guildMemberAdd", (member) => {
 client.on('guildMemberAdd', member => {
     var embed = new Discord.RichEmbed()
     .setThumbnail(member.user.avatarURL)
-  .addField("***Check The #rules***" ,member.user.username )
-    .setDescription('***JOINED THE Cileeeo SERVER !***')
+  .addField("**:arrow_forward:  :calendar_spiral: **" ,member.user.username )
+    .setDescription('**أهلا بك في سيرفر سيلو , نتمنى لك وقتا ممتعا !**')
     .setColor('#b465f1')
-    .setImage('https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png')
+    .setImage('https://cdn.discordapp.com/attachments/474484145977032704/474714720893534228/backgrounder_2.png')
 var channel =member.guild.channels.find('name', 'cileeęo')
 if (!channel) return;
 channel.send({embed : embed});
