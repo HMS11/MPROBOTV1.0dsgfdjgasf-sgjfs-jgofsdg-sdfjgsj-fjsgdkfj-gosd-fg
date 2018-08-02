@@ -437,13 +437,19 @@ client.on("guildMemberAdd", (member) => {
 
 
 
-
-client.on('guildMemberAdd', member => {
- message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
-var channel =member.guild.channels.find('name', 'cileeęo')
-if (!channel) return;
-channel.send({embed : embed});
-});
-
+client.on("guildMemberAdd", member => {
+	message.channel.sendFile("https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png");
+let welcomer = member.guild.channels.find("name","chat");
+      if(!welcomer) return;
+      if(welcomer) {
+         moment.locale('ar-ly');
+         var h = member.user;
+        let norelden = new Discord.RichEmbed()
+  
+     welcomer.send({embed:norelden});          
+               
+ 
+      }
+      });
 
 client.login(process.env.BOT_TOKEN);
