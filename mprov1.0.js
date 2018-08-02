@@ -431,6 +431,7 @@ client.on('guildMemberRemove', member => {
      channel.send({embed:embed});
 });
 client.on('message', msg => {
+    const prefix = '#'
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
