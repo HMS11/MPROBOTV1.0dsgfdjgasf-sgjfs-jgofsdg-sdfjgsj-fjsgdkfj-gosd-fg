@@ -152,7 +152,7 @@ client.on('message', message => {
                         .addField("*LISTENING :musical_score:  **","** **")
          message.channel.send({embed:embed});
                         }
-  } else 
+  
   if (message.content.startsWith(adminprefix + 'streaming')) {
     client.user.setGame(argresult, "https://www.twitch.tv/idk");
         if(!message.channel.guild) return;
