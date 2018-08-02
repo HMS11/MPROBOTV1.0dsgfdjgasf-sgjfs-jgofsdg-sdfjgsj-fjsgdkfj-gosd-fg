@@ -444,7 +444,7 @@ client.on('guildMemberAdd', member => {
   .addField("**:arrow_forward:  :calendar_spiral: **" ,member.user.username )
     .setDescription('**أهلا بك في سيرفر سيلو , نتمنى لك وقتا ممتعا !**')
     .setColor('#b465f1')
-    .setImage('https://cdn.discordapp.com/attachments/474484145977032704/474714720893534228/backgrounder_2.png')
+    .setImage('https://cdn.discordapp.com/attachments/474320484452925490/474716542270177290/backgrounder_2.png')
 var channel =member.guild.channels.find('name', 'cileeęo')
 if (!channel) return;
 channel.send({embed : embed});
