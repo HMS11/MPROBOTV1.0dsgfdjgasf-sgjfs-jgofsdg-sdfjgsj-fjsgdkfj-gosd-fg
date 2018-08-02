@@ -247,4 +247,17 @@ client.on('message', message => {
                         }
                     });
 
+
+client.on('message', message => {
+	var prefix = "#";
+  if (!message.content.startsWith(prefix)) return;
+  const verifed = ["389136174154907651"];
+if (message.content.startsWith(prefix + 'owner')) {
+if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`Owner HERE ! :x:`)
+} else {
+   message.reply('**You Are Not OWNER !**' + '❌');   
+}
+}
+});
+
 client.login(process.env.BOT_TOKEN);
