@@ -277,7 +277,7 @@ client.on('message', message => {
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
                             if (message.author.bot) return;
-              message.channel.sendFile("https://cdn.discordapp.com/attachments/467154533202788363/474462484984627211/colors.png");
+              message.channel.sendFile("https://cdn.discordapp.com/attachments/467154533202788363/474705862489931777/colors.png");
 
                         }
                     });
