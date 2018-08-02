@@ -59,7 +59,7 @@ if(!message.channel.guild) return message.channel.send('**This Command is Just F
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**You Do not have permission** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
 let request = `Requested By ${message.author.username}`;
-message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+message.channel.send(`**هل أنت متأكد من مسح الشات ؟**`).then(msg => {
 msg.react('✅')
 .then(() => msg.react('❌'))
 .then(() =>msg.react('✅'))
@@ -75,12 +75,8 @@ var msg;
         msg = parseInt();
 
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-      message.channel.sendMessage("", {embed: {
-        title: "`` Chat Deleted ``",
-        color: 0x06DF00,
-        footer: {
-
-        }
+    message.channel.send(`**Changing The Avatar To , :zap: ****${argresult}** `);
+   
       }}).then(msg => {msg.delete(3000)});
 
 })
