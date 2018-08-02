@@ -237,6 +237,11 @@ setInterval(function(){})
 
 
 
+client.on('message', message => {
+            if (message.content === '#colors')
+            message.channel.sendFile("https://cdn.discordapp.com/attachments/467154533202788363/474462484984627211/colors.png");
+    }
+});
 
 
 client.login(process.env.BOT_TOKEN);
