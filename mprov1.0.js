@@ -441,8 +441,8 @@ client.on("guildMemberAdd", (member) => {
 client.on('guildMemberAdd', member => {
     var embed = new Discord.RichEmbed()
     .setThumbnail(member.user.avatarURL)
-  .addField("***شكرا الانضمامك الينا***" ,member.user.username )
-    .setDescription('#rules')
+  .addField("***Check The #rules***" ,member.user.username )
+    .setDescription('***JOINED THE Cileeeo SERVER !***')
     .setColor('RANDOM')
     .setImage('https://cdn.discordapp.com/attachments/450932860568862720/456993172871053335/image.png')
 var channel =member.guild.channels.find('name', 'cileeęo')
