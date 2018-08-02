@@ -438,6 +438,7 @@ client.on('message', msg => {
   let args = msg.content.split(" ").slice(1);
 
     if(command === "clear") {
+	     	const prefix = '#'
         const emoji = client.emojis.find("name", "log")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
