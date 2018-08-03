@@ -441,7 +441,6 @@ client.on("guildMemberAdd", (member) => {
 client.on('guildMemberAdd', member => {
     var embed = new Discord.RichEmbed()
     .setThumbnail(member.user.avatarURL)
-  .addField("**:arrow_forward:  :calendar_spiral: **")
             .setAuthor(member.user.tag, member.user.avatarURL)
     .setDescription('**أهلا بك في سيرفر سيلو , نتمنى لك وقتا ممتعا !**')
     .setColor('#b465f1')
