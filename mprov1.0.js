@@ -93,6 +93,7 @@ client.on('message', message => {
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
                             if (message.author.bot) return;
+		    msg.channel.send("**PING :**',api + " ms ⚡").then(m => m.delete(3000));
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
