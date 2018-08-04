@@ -1474,7 +1474,6 @@ client.on('message', message => {
 	
 	
 
-const fs = require("fs"); //npm i fs
 const ms = require("ms"); //npm i ms
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 
