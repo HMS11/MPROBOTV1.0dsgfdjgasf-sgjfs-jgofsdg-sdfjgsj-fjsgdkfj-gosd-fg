@@ -744,7 +744,7 @@ client.on('message', async message => {
 
 
 
-  hero.on('message',async message => {
+  client.on('message',async message => {
   let messageArray = message.content.split(' ');
   let mention = message.mentions.users.first();
   if(message.content.startsWith(prefix + 'transfer')) {
