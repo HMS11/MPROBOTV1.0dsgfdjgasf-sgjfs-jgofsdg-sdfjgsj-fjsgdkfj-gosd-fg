@@ -741,10 +741,21 @@ client.on('message', async message => {
     }
 });
 
-// البكجات :
 
-/*
-* npm i file-system
-*/
 
+
+  hero.on('message',async message => {
+  let messageArray = message.content.split(' ');
+  let mention = message.mentions.users.first();
+  if(message.content.startsWith(prefix + 'transfer')) {
+    if(!mention) return message.channel.send('**من فضلك قم بعمل منشن للشخص**');
+    if(isNaN(messageArray[2])) return message.channel.send('**#transfer @name [ammount]**');
+    credits[mention.id].credits += (+messageArray[2]);
+    credits[message.author.id].credits += (-messageArray[2]);
+    fs.writeFile('./creditsCode' ,JSON.stringify(credits), (err) => {
+      if(err) console.error(err);
+    });
+    message.channel.send(`**:moneybag: | ${message.author.username}, has transfered ${messageArray[2]}$ to ${mention}**`)
+  }
+});
 client.login(process.env.BOT_TOKEN);
