@@ -691,7 +691,7 @@ const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
 const coolDown = new Set();
 
 client.on('message',async message => {
-
+const prefix = "#"
 if(message.author.bot) return;
 if(!credits[message.author.id]) credits[message.author.id] = {
     credits: 50
@@ -707,14 +707,14 @@ fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
       credits: m + 0.5,
   }
 
-    if(message.content.startsWith(prefix + "%credit" || prefix + "credits")) {
+    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
 message.channel.send(**${message.author.username}, your 💳 balance is \`${userData.credits}``.);
 }
 });
 
 client.on('message', async message => {
     let amount = 250;
-    if(message.content.startsWith(prefix + "%daily")) {
+    if(message.content.startsWith(prefix + "daily")) {
     if(message.author.bot) return;
     if(coolDown.has(message.author.id)) return message.channel.send(⏱ | ${message.author.username}, your daily 💴 credits refreshes in ``1 Day``.);
     
