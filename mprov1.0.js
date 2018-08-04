@@ -54,7 +54,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 client.on('message', message => {
        const prefix = '#'
    if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'reclear')) {
+if(message.content.startsWith(prefix + 'clear')) {
 if(!message.channel.guild) return message.channel.send('**أنت لا تملك الصلاحيات ! :x:**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**أنت لا تملك الصلاحيات ! :x:** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
