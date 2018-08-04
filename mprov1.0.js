@@ -429,26 +429,6 @@ if (!channel) return;
 channel.send({embed : embed});
 });
 
-client.on('message', message => { 
-    var prefix = "#";
-    if (message.author.boss) return;
-    if (!message.content.startsWith(prefix)) return;
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-    if (command == "role") {
-    if (!message.channel.guild) return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.reply("**:no_entry_sign:انت لا تملك صلاحيات **").then(msg => msg.delete(5000));;
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
-    let user = message.mentions.users.first();
-    if (message.mentions.users.size < 1) return message.reply('**ضع منشن الشخص!!**').then(msg => {msg.delete(5000)});
-    let MRole = message.content.split(" ").slice(2).join(" ");
-    if(!MRole)return message.reply("يجب عليك وضع اسم الرتبة").then(msg => {msg.delete(5000)});
-    message.guild.member(user).addRole(message.guild.roles.find("name", MRole));
-    message.reply('*** Done :white_check_mark:  ***').then(msg => {msg.delete(10000)});
-    }
-    });
-    
-
 
 const ytdl = require('ytdl-core');
 const request = require('request');
@@ -1034,6 +1014,48 @@ client.on('messageUpdate', (message, newMessage) => {
 
 
 });
+
+
+
+
+
+
+
+
+
+client.on('message', msg => {
+    if(msg.content === '#staff') {
+        
+        if(!msg.channel.guild) return msg.reply("هذا الأمر للسيرفرات فقط")
+        let staff = msg.guild.member(msg.author).roles.find('name', '⚡');
+       
+if(!staff) return msg.reply('انت لست من الأداره')
+if (msg.author.bot) return;
+  const embed = new Discord.RichEmbed()
+            .setColor("RANDOM")
+            .setThumbnail(msg.author.avatarURL)
+                                .setTitle("**أوامر الأداره**")
+            .setDescription(`اهلاً ايها الأداري ${msg.author.tag}
+            هذه اوامر الأداره للتذكير
+            $ban
+            $kick
+            $mute
+            $unmute`)
+
+
+        msg.author.sendEmbed(embed)
+
+    }
+
+});
+
+
+
+
+
+
+
+
 
 
 client.login(process.env.BOT_TOKEN);
