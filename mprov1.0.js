@@ -1471,71 +1471,125 @@ client.on('message', message => {
 });
 	
 	
+client.on('ebnklb',function(ebnklb) {
+    
+    if(ebnklb.content.startsWith("<@474311458323300362>")) {
+        ebnklb.channel.send('Hey Im **Cilęo, Server.**  A Nice Bot Developed By:`459300517999411218`')
+        ebnklb.channel.send('My Prefix `#`')
+
+    }
+});	
 	
-	
-
-const ms = require("ms"); //npm i ms
-let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
-
-client.on('message', message =>{
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let prefix = '#';
-     
-    if(cmd === `${prefix}warn`) {
-
-  //!warn @daeshan <reason>
-  if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("U don't have enough permissions to warn Users!");
-  let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-  if(!wUser) return message.reply("yo i can't find this User");
-  if(wUser.hasPermission("ADMINISTRATOR")) return message.reply("This User is very cool why warn him? >.>");
-  let reason = args.join(" ").slice(22);
-
-  if(!warns[wUser.id]) warns[wUser.id] = {
-    warns: 0
-  };
-
-  warns[wUser.id].warns++;
-
-  fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
-    if (err) console.log(err)
-  });
-
-let warnEmbed = new Discord.RichEmbed()
-  .setDescription("Warns")
-  .setAuthor(message.author.username)
-  .setColor("#fc6400")
-  .addField("Warned User", `<@${wUser.id}>`)
-  .addField("Warned In", message.channel)
-  .addField("Number of Warnings", warns[wUser.id].warns)
-  .addField("Reason", reason);
 
 
-  message.channel.send(warnEmbed);
 
-  if(warns[wUser.id].warns == 2){
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole) return message.reply("You should make A **muted** role, to mute this User!!");
 
-    let mutetime = "10s";
-    await(wUser.addRole(muterole.id));
-    message.channel.send(`<@${wUser.id}> Just muted for sometime!`);
 
-    setTimeout(function(){
-      wUser.removeRole(muterole.id)
-      message.reply(`<@${wUser.id}> Just unmuted!`)
-    }, ms(mutetime))
+client.on('message', message => {
+   if(message.content.startsWith(prefix + "invites")) {
+    message.guild.fetchInvites().then(invs => {
+      let user = message.mentions.users.first() || message.author
+      let personalInvites = invs.filter(i => i.inviter.id === user.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+message.channel.send(`${user} has ${inviteCount} invites.`);
+});
   }
-  if(warns[wUser.id].warns == 3){
-    message.guild.member(wUser).ban(reason);
-    message.reply(`<@${wUser.id}> Just banned for 3 warns!!`)
-  }
+});
 
+
+
+
+
+
+client.on('message', message => {
+  
+if(message.content.split(' ')[0] == '#contant'){
+     if(message.channel.guild) return;
+                        let args = message.content.split(' ').slice(1).join(' ');
+
+                                               client.guilds.get("459300517999411218").members.get("459300517999411218").sendMessage(message.author.tag+"\n Message : "+args)
+                                               message.author.sendMessage("Done! ✅ ")
+                                               //CopyRight Memo-Codes
+                                             
 }
 });
 
 
 
-	
+client.on('message', async message => {
+    let date = moment().format('Do MMMM YYYY , hh:mm');
+    let User = message.mentions.users.first();
+    let Reason = message.content.split(" ").slice(3).join(" ");
+    let messageArray = message.content.split(" ");
+    let time = messageArray[2];
+    if(message.content.startsWith(prefix + "tempban")) {
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- You don't have the needed permissions!**");
+       if(!User) message.channel.send("**- Mention someone!**");
+       if(User.id === client.user.id) return message.channel.send("**- You cannot ban me!**");
+       if(User.id === message.guild.owner.id) return message.channel.send("**- You cannot ban the owner of the server!**");
+       if(!time) return message.channel.send("**- Supply a duration!**");
+       if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Supply a real time!**');
+       if(!Reason) message.channel.send("**- Supply a reason!**");
+       let banEmbed = new Discord.RichEmbed()
+       .setAuthor(`You have been banned from ${message.guild.name} !`)
+       .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
+       .addField('- Banned By: ',message.author.tag,true)
+       .addField('- Reason:',Reason,true)
+       .addField('- Banned At:',date,true)
+       .addField('- Duration:',time,true)
+       .setFooter(message.author.tag,message.author.avatarURL);
+       User.sendMessage({embed: banEmbed}).then(() => message.guild.member(User).ban({reason: Reason}))
+       .then(() => message.channel.send(`**# Done! I banned: ${User}**`)).then(() => { setTimeout(() => {
+           message.guild.unban(User);
+       }, mmss(time));
+    });
+   } 
+});
+
+
+
+
+client.on('message', async message => {
+    let muteReason = message.content.split(" ").slice(3).join(" ");
+    let mutePerson = message.mentions.users.first();
+    let messageArray = message.content.split(" ");
+    let muteRole = message.guild.roles.find(r => r.name === 'Muted');
+    let time = messageArray[2];
+    if(message.content.startsWith(prefix + "tempmute")) {
+        if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.channel.send('**- You don\'t have the needed permissions!**');
+        if(!mutePerson) return message.channel.send("**- Mention someone!**");
+        if(mutePerson === message.author) return message.channel.send('**- You cannot mute yourself!**');
+        if(mutePerson === client.user) return message.channel.send('**- You cannot mute me!**');
+        if(message.guild.member(mutePerson).roles.has(muteRole.id)) return message.channel.send('**- This person is already muted!**');
+        if(!muteRole) return message.guild.createRole({ name: "Muted", permissions: [] });
+        if(!time) return message.channel.send("**- Supply a time!**");
+        if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Supply a real time!**');
+        if(!muteReason) return message.channel.send("**- Supply a reason!**");
+        message.guild.channels.forEach(async (channel, id) => {
+      message.channel.overwritePermissions(muteRole, {
+        SEND_MESSAGES: false,
+        ADD_REACTIONS: false
+      });
+    });
+        message.guild.member(mutePerson).addRole(muteRole);
+        let muteEmbed = new Discord.RichEmbed()
+        .setAuthor(`${mutePerson.username}#${mutePerson.discriminator}`,mutePerson.avatarURL)
+        .setTitle(`You have been muted in ${message.guild.name}`)
+        .setThumbnail(message.guild.iconURL)
+        .addField('- Muted By:',message.author,true)
+        .addField('- Reason:',muteReason,true)
+        .addField('- Duration:',`${mmss(mmss(time), {long: true})}`)
+        .setFooter(message.author.username,message.author.avatarURL);
+        message.guild.member(mutePerson).sendMessage(muteEmbed)
+        message.channel.send(`**- Done!, I muted: ${mutePerson}**`)
+        .then(() => { setTimeout(() => {
+           message.guild.member(mutePerson).removeRole(muteRole);
+       }, mmss(time));
+    });
+    }
+})
+
+
+
+
 client.login(process.env.BOT_TOKEN);
