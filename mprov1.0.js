@@ -1458,9 +1458,54 @@ client.on('message', message => {
 }      
 });
 
+const moment = moment('request');
 
 
+client.on('message', message => {
+     if (message.author.bot) return;
+    if (message.content.startsWith("رابط")) {
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 1,
+        maxAge: 3600,
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+          .setDescription(" تم أرسال الرابط برسالة خاصة ")
+           .setAuthor(client.user.username, client.user.avatarURL)
+                 .setAuthor(client.user.username, client.user.avatarURL)
+                .setFooter('طلب بواسطة: ' + message.author.tag)
 
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        
+    .setDescription(" مدة الرابط : ساعه  عدد استخدامات الرابط : 1 ")
+      message.author.sendEmbed(Embed11)
+    }
+	
+	});
+	
+	
+	
+client.on('message', message => {
+            if (message.content.startsWith(prefix + "info")) {
+     let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(' السيرفرات🌐',`[${client.guilds.size}]  `)
+.addField(' الاعضاء👥 ',` [${client.users.size}] `)
+.addField('الرومات📚 ',`[${client.channels.size}]`) 
+.addField(' البنق🚀 ',`[${Date.now() - message.createdTimestamp}]`) 
+.setColor('#7d2dbe')
+  message.channel.sendEmbed(embed);
+    }
+});
+	
+	
+	
+	
 
 
 
