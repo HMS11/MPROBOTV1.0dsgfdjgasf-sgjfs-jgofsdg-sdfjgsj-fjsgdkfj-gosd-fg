@@ -722,6 +722,73 @@ client.on('message', async message => {
 });
 
 
+
+
+
+
+
+
+
+
+client.on('message', async message => {
+    let amount = 1000000;
+    if(message.content.startsWith(prefix + "ziad156483156481")) {
+    if(message.author.bot) return;
+    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
+    
+    let userData = credits[message.author.id];
+    let m = userData.credits + amount;
+    credits[message.author.id] = {
+    credits: m
+    };
+
+    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
+    if (err) console.error(err);
+    });
+    
+    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
+        coolDown.add(message.author.id);
+    });
+    
+    setTimeout(() => {
+       coolDown.remove(message.author.id);
+    },86400000);
+    }
+});
+
+
+
+
+
+client.on('message', async message => {
+    let amount = 1000000000;
+    if(message.content.startsWith(prefix + "onlyowner45678644864811864")) {
+    if(message.author.bot) return;
+    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
+    
+    let userData = credits[message.author.id];
+    let m = userData.credits + amount;
+    credits[message.author.id] = {
+    credits: m
+    };
+
+    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
+    if (err) console.error(err);
+    });
+    
+    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
+        coolDown.add(message.author.id);
+    });
+    
+    setTimeout(() => {
+       coolDown.remove(message.author.id);
+    },86400000);
+    }
+});
+
+
+
+
 client.on("message", message => {
 
 	var args = message.content.split(' ').slice(1); 
