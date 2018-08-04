@@ -656,213 +656,8 @@ function isYoutube(str) {
 }
  
 
-client.on('message', message => {
-    if (message.content.startsWith("#invites")) {
-
-    message.guild.fetchInvites()
-    .then(invites => message.channel.send(`**  [${invites.find(invite => invite.inviter.id === message.author.id)}]    :calling:  **One**    `))
-         
-    }
-});
 
 
-
-
-
-const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
-const coolDown = new Set();
-
-client.on('message',async message => {
-    
-if(message.author.bot) return;
-if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 50
-};
-
-let userData = credits[message.author.id];
-let m = userData.credits;
-
-fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
-    if (err) console.error(err);
-  });
-  credits[message.author.id] = {
-      credits: m + 0.5,
-  }
-  
-    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
-message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
-}
-});
-
-client.on('message', async message => {
-    let amount = 250;
-    if(message.content.startsWith(prefix + "daily")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-    
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
-
-
-
-
-
-
-
-
-
-
-client.on('message', async message => {
-    let amount = 1000000;
-    if(message.content.startsWith(prefix + "ziad156483156481")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-    
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
-
-
-
-
-
-client.on('message', async message => {
-    let amount = 1000000000;
-    if(message.content.startsWith(prefix + "onlyowner45678644864811864")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-    
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
-
-
-
-
-
-
-  client.on('message',async message => {
-  let messageArray = message.content.split(' ');
-  let mention = message.mentions.users.first();
-  if(message.content.startsWith(prefix + 'transfer')) {
-    if(!mention) return message.channel.send('**منشن شخص**');
-    if(isNaN(messageArray[2])) return message.channel.send('**هذه الخانة يجب ان تكون رقم وليس احرف**');
-    credits[mention.id].credits += (+messageArray[2]);
-    credits[message.author.id].credits += (-messageArray[2]);
-    fs.writeFile('./creditsCode' ,JSON.stringify(credits), (err) => {
-      if(err) console.error(err);
-    });
-    message.channel.send(`**:moneybag: | ${message.author.username}, has transfered ${messageArray[2]}$ to ${mention}**`)
-  }
-});
-  
-
-
-
-
-
-
-
-
-
-
-
-client.on("message", message => {
-
-	var args = message.content.split(' ').slice(1); 
-	var msg = message.content.toLowerCase();
-	if( !message.guild ) return;
-	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
-	if( msg.toLowerCase().startsWith( prefix + 'rerole' ) ){
-		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
-		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
-			message.mentions.members.first().removeRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.removeRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
-		} 	
-	} else {
-		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
-		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
-			message.mentions.members.first().addRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.addRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
-		} 
-	} 
-});
 
 
 
@@ -1149,7 +944,7 @@ if (msg.author.bot) return;
 
 
   client.on('messageUpdate', (oldRebel, newRebel) => {
-    console.log("عصو مآ يحآول التعديل.");
+    console.log("-");
    if (newRebel.content.toUpperCase().match(/DISCORD.GG/i))
     {
         console.log(newRebel.author.name + " حاول النشر عبر تعديل الرسآلة - " + newRebel);
@@ -1193,7 +988,7 @@ if (msg.author.bot) return;
     var prefix = "#"; // غير هنا حط البرفكس
  
             var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix + "tclear")) {
+            if (message.content.startsWith(prefix + "clear")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **ليس لديك صلاحيات**');
         var msg;
         msg = parseInt();
@@ -1418,7 +1213,7 @@ client.on('voiceStateUpdate', (old, now) => {
   const channel = client.channels.get('475246385017651201');
   const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
   const size = channel.name.match(/\[\s(\d+)\s\]/);
-  if (!size) return channel.setName(`Voice Online: ${currentSize}`);
+  if (!size) return channel.setName(`Voice Online[${currentSize}]`);
   if (currentSize !== size) channel.setName(`Voice Online: ${currentSize}`);
 });
 
@@ -1470,16 +1265,6 @@ client.on('message', message => {
 });
 	
 	
-client.on('ebnklb',function(ebnklb) {
-    
-    if(ebnklb.content.startsWith("<@474311458323300362>")) {
-        ebnklb.channel.send('Hey Im **Cilęo, Server.**  A Nice Bot Developed By:`459300517999411218`')
-        ebnklb.channel.send('My Prefix `#`')
-
-    }
-});	
-	
-
 
 
 
@@ -1496,97 +1281,6 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 });
 
 
-
-
-
-
-client.on('message', message => {
-  
-if(message.content.split(' ')[0] == '#contant'){
-     if(message.channel.guild) return;
-                        let args = message.content.split(' ').slice(1).join(' ');
-
-                                               client.guilds.get("459300517999411218").members.get("459300517999411218").sendMessage(message.author.tag+"\n Message : "+args)
-                                               message.author.sendMessage("Done! ✅ ")
-                                               //CopyRight Memo-Codes
-                                             
-}
-});
-
-
-
-client.on('message', async message => {
-    let date = moment().format('Do MMMM YYYY , hh:mm');
-    let User = message.mentions.users.first();
-    let Reason = message.content.split(" ").slice(3).join(" ");
-    let messageArray = message.content.split(" ");
-    let time = messageArray[2];
-    if(message.content.startsWith(prefix + "tempban")) {
-       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- You don't have the needed permissions!**");
-       if(!User) message.channel.send("**- Mention someone!**");
-       if(User.id === client.user.id) return message.channel.send("**- You cannot ban me!**");
-       if(User.id === message.guild.owner.id) return message.channel.send("**- You cannot ban the owner of the server!**");
-       if(!time) return message.channel.send("**- Supply a duration!**");
-       if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Supply a real time!**');
-       if(!Reason) message.channel.send("**- Supply a reason!**");
-       let banEmbed = new Discord.RichEmbed()
-       .setAuthor(`You have been banned from ${message.guild.name} !`)
-       .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
-       .addField('- Banned By: ',message.author.tag,true)
-       .addField('- Reason:',Reason,true)
-       .addField('- Banned At:',date,true)
-       .addField('- Duration:',time,true)
-       .setFooter(message.author.tag,message.author.avatarURL);
-       User.sendMessage({embed: banEmbed}).then(() => message.guild.member(User).ban({reason: Reason}))
-       .then(() => message.channel.send(`**# Done! I banned: ${User}**`)).then(() => { setTimeout(() => {
-           message.guild.unban(User);
-       }, mmss(time));
-    });
-   } 
-});
-
-
-
-
-client.on('message', async message => {
-    let muteReason = message.content.split(" ").slice(3).join(" ");
-    let mutePerson = message.mentions.users.first();
-    let messageArray = message.content.split(" ");
-    let muteRole = message.guild.roles.find(r => r.name === 'Muted');
-    let time = messageArray[2];
-    if(message.content.startsWith(prefix + "tempmute")) {
-        if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES")) return message.channel.send('**- You don\'t have the needed permissions!**');
-        if(!mutePerson) return message.channel.send("**- Mention someone!**");
-        if(mutePerson === message.author) return message.channel.send('**- You cannot mute yourself!**');
-        if(mutePerson === client.user) return message.channel.send('**- You cannot mute me!**');
-        if(message.guild.member(mutePerson).roles.has(muteRole.id)) return message.channel.send('**- This person is already muted!**');
-        if(!muteRole) return message.guild.createRole({ name: "Muted", permissions: [] });
-        if(!time) return message.channel.send("**- Supply a time!**");
-        if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Supply a real time!**');
-        if(!muteReason) return message.channel.send("**- Supply a reason!**");
-        message.guild.channels.forEach(async (channel, id) => {
-      message.channel.overwritePermissions(muteRole, {
-        SEND_MESSAGES: false,
-        ADD_REACTIONS: false
-      });
-    });
-        message.guild.member(mutePerson).addRole(muteRole);
-        let muteEmbed = new Discord.RichEmbed()
-        .setAuthor(`${mutePerson.username}#${mutePerson.discriminator}`,mutePerson.avatarURL)
-        .setTitle(`You have been muted in ${message.guild.name}`)
-        .setThumbnail(message.guild.iconURL)
-        .addField('- Muted By:',message.author,true)
-        .addField('- Reason:',muteReason,true)
-        .addField('- Duration:',`${mmss(mmss(time), {long: true})}`)
-        .setFooter(message.author.username,message.author.avatarURL);
-        message.guild.member(mutePerson).sendMessage(muteEmbed)
-        message.channel.send(`**- Done!, I muted: ${mutePerson}**`)
-        .then(() => { setTimeout(() => {
-           message.guild.member(mutePerson).removeRole(muteRole);
-       }, mmss(time));
-    });
-    }
-})
 
 
 
