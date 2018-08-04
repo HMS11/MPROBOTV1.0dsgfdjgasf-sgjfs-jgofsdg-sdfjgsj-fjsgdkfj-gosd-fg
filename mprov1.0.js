@@ -1372,4 +1372,143 @@ client.on('message', message =>{
 });
 
 
+
+client.on('message', message => {
+    var prefix = "#"
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "ban") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  /*let b5bzlog = client.channels.find("name", "5bz-log");
+  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
+  if(!reason) return message.reply ("**اكتب سبب الطرد**");
+  if (!message.guild.member(user)
+  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+
+  message.guild.member(user).ban(7, user);
+
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : banembed
+  })
+}
+});
+
+
+
+
+client.on('voiceStateUpdate', (old, now) => {
+  const channel = client.channels.get('475246385017651201');
+  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
+  const size = channel.name.match(/\[\s(\d+)\s\]/);
+  if (!size) return channel.setName(`Voice Online: ${currentSize}`);
+  if (currentSize !== size) channel.setName(`Voice Online: ${currentSize}`);
+});
+
+
+
+
+
+client.on('message', message => { 
+    var prefix ="#";
+           if (message.content.startsWith(prefix + "id")) {
+     var args = message.content.split(" ").slice(1);
+     let user = message.mentions.users.first();
+     var men = message.mentions.users.first();
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL) 
+    .setColor("#707070")
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
+    .setFooter(`Morro Bot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
+    .setThumbnail(heg.avatarURL);
+    message.channel.send(id)
+}       });
+
+
+
+
+
+
+
+
+
+client.on('message', message => {
+     if (message.author.bot) return;
+    if (message.content.startsWith("رابط")) {
+        message.channel.createInvite({
+        thing: true,
+        maxUses: 1,
+        maxAge: 3600,
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+          .setDescription(" تم أرسال الرابط برسالة خاصة ")
+           .setAuthor(client.user.username, client.user.avatarURL)
+                 .setAuthor(client.user.username, client.user.avatarURL)
+                .setFooter('طلب بواسطة: ' + message.author.tag)
+
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        
+    .setDescription(" مدة الرابط : ساعه  عدد استخدامات الرابط : 1 ")
+      message.author.sendEmbed(Embed11)
+    }
+	
+	
+	
+	
+	
+	         client.on('message', message => {
+            if (message.content.startsWith(prefix + "info")) {
+     let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField(' السيرفرات🌐',`[${client.guilds.size}]  `)
+.addField(' الاعضاء👥 ',` [${client.users.size}] `)
+.addField('الرومات📚 ',`[${client.channels.size}]`) 
+.addField(' البنق🚀 ',`[${Date.now() - message.createdTimestamp}]`) 
+.setColor('#7d2dbe')
+  message.channel.sendEmbed(embed);
+    }
+});
+	
+	
+	
+	
+	
 client.login(process.env.BOT_TOKEN);
