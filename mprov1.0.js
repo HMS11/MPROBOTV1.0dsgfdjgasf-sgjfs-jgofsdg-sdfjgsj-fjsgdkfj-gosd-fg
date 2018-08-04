@@ -21,6 +21,14 @@ client.on('ready', () => {
 
 
 
+client.on('ready', () => {
+     client.user.setActivity(" Cileeęo.",{type: 'WATCHING'})
+
+});
+
+
+
+
 
 client.on('message', message => {
   	const prefix = '#'
