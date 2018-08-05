@@ -1366,6 +1366,6 @@ client.on('message', msg => {
     if(msg.content.startsWith (prefix  + 'help')) {
     msg.reply('**📩 شيك علي الخاص**');
   }
-
+});
 
 client.login(process.env.BOT_TOKEN);
