@@ -1372,21 +1372,113 @@ client.on('message', msg => {
 
 
 
+client.on('message', function(message) {
+    if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        var iiMo = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setTimestamp()
+        .setTitle('``I have received a new DM !``')
+        .setThumbnail(`${message.author.avatarURL}`)
+        .setDescription(`\n\n\`\`\`${message.content}\`\`\``)
+        .setFooter(`From **${message.author.tag} (${message.author.id})**`)
+    client.channels.get("475920075811979264").send({embed:iiMo});
+    }
+});
+
+
+
+
+
+
+
+client.on('message',function(message) {
+    if(!message.channel.guild) return undefined;
+    const swearWords = ["نيوك","قحبة","زب","كس"];
+    if (swearWords.some(word => message.content.includes(word)) ) {
+      message.delete()
+      message.reply("**رجائا عدم السب , :zap: **"); 
+    }
+  });
+
+
+
+client.on(`message`, message => {
+    var args = message.content.split(/[ ]+/)
+    if(message.content.includes(`https://www.youtube.com/watch`)){
+    message.delete()
+    return message.reply(`**يمنع نشر روابط اليوتيوب **`)
+}
+});
+
+//ملاحظة : لو تبي تغير يعني مو يوتيوب اي شي تبيه فيس بوك الخ .. تغير كلمة يوتيوب
+
+
+
+
+
+
+
 
 
 
 
 
 client.on('message', message => {
-    if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
-
-    if (message.content.startsWith(prefix + 'edit')) {
-        message.channel.sendMessage('Edit me').then(msg=>{msg.edit('Done edit')});
+    if(message.content == '#servers') {
+             if(!message.author.id === '459300517999411218') return;
+    var gimg;
+    var gname;
+    var gmemb;
+    var gbots;
+    var groles;
+    var servers = client.guilds;
+    servers.forEach((g)=>{
+    gname = g.name;
+    gimg = g.iconURL;
+    gmemb = g.members.size;
+    gbots = g.members.filter(m=>m.bot).size;
+    groles = g.roles.map(r=> {return r.name});
+    let serv = new Discord.RichEmbed()
+    .setAuthor(gname,gimg)
+    .setThumbnail(gimg)
+    .addField('Server bots',gbots)
+    .addField('Server Member Count',gmemb = g.members.size)
+    .setColor('RANDOM')
+    message.channel.send(`
+    اسم السيرفر : **${gname}**
+    عدد اعضاء السيرفر : **${gmemb} **
+            
+            `);
+          message.channel.sendEmbed(serv);
+    }) 
     }
-});
+    });
 
 
+
+
+
+
+
+
+
+client.on("guildCreate", guild => {
+    client.channels.get("475920075811979264").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+    });
+    
+    client.on("guildDelete", guild => {
+    client.channels.get("475920075811979264").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+    });
+
+
+
+
+
+
+client.on("guildCreate", guild => {
+    console.log(` شخص ما اضاف بوت  في سيرفر اسمه ! ${guild.name} اونر سيرفر هو ${guild.owner.user.username}!`)
+  });
 
 
 
