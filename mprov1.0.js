@@ -208,7 +208,7 @@ client.on('message', message => {
     
       }
  
-        if(!message.channel.guild) return;
+      if(!message.channel.guild) return;
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
                             if (message.author.bot) return;
