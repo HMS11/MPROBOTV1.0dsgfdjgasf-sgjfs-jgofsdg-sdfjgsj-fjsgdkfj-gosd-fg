@@ -48,7 +48,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
       .setColor('RANDOM')
       m.sendMessage(args)
   });
-         if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("**PERM Not Founded** :warning:   ");
+         if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("``**هذا الأمر مخصص للأدارة**``");
         
 }
 } else {
@@ -62,8 +62,8 @@ client.on('message', message => {
        const prefix = '#'
    if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('**أنت لا تملك الصلاحيات ! :x:**').then(m => m.delete(5000));
-if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**أنت لا تملك الصلاحيات ! :x:** `ADMINISTRATOR`' );
+if(!message.channel.guild) return message.channel.send('``**هذا الأمر مخصص للأدارة**``').then(m => m.delete(5000));
+if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('``**هذا الأمر مخصص للأدارة**`` `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
 let request = `Requested By ${message.author.username}`;
 message.channel.send(`**هل أنت متأكد من مسح الشات ؟**`).then(msg => {
