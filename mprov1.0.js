@@ -190,6 +190,34 @@ client.on('message', message => {
                         .addField("**STREAMING  :space_invader: **","** **")
          message.channel.send({embed:embed});
                         }
+   if (message.content.startsWith(adminprefix + 'photostreaming')) {
+      client.user.setPresence({
+      status: 'dnd',
+      game: { 
+         type: 0,
+         name: 'Surprise Mother Fucker :) ',
+         details: `I'm : KBOOSH - Developer and Programmer`,
+         url: 'http://twitch.tv/Streammingg',
+         state: `إنْ لَمْ تَجِد لكْ حآقدْ إعلمْ أنْك إنسآن فآشِلْ`,
+        application_id: '281376075802476544',
+         assets: {
+            small_image: `366835431037337600`,
+            small_text: ' Take This ! ' ,
+            large_image: `370451271133429760`,
+            large_text: `ҜṦẰ FOREVER ♥` }
+    
+      }
+ 
+        if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('RANDOM')
+                        .addField("**STREAMING  :space_invader: **","** **")
+         message.channel.send({embed:embed});
+                        }
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
       message.channel.send(`**Changing The Name To , :zap: ****${argresult}** `)
@@ -1377,7 +1405,70 @@ client.on("guildCreate", guild => {
 
 
 
+client.on('message', message => {
+    var prefix = "#"
+    let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
 
+  let args = message.content.split(" ").slice(1);
+
+
+if(command == "draw") {
+    var Canvas = require('canvas')
+  , Image = new Canvas.Image
+  , canvas = new Canvas(450, 170)
+  , ctx = canvas.getContext('2d');
+  ctx.font = '30px Impact';
+  let args = message.content.split(" ").slice(1);
+  
+Image.src = canvas.toBuffer();
+
+    console.log(Image);
+ctx.drawImage(Image, 0, 0, Image.width / 470, Image.height / 170);
+ctx.fillText(args.join("  "),110, 70);
+
+
+ctx.beginPath();
+ctx.lineTo(50, 102);
+ctx.stroke();
+
+message.channel.sendFile(canvas.toBuffer());
+}
+}).on('ready', () => {
+
+});
+
+
+
+
+const moment = require('moment');//npm install moment
+client.on('message', message => {
+             var prefix = "#"
+if (message.content.startsWith(prefix + "time")) {
+let user = message.mentions.users.first();
+var args = message.content.split(" ").slice(1);
+var men = message.mentions.users.first();
+var heg;
+if(men) {
+heg = men
+} else {
+heg = message.author
+}
+var mentionned = message.mentions.members.first();
+var h;
+if(mentionned) {
+h = mentionned
+} else {
+h = message.member
+}
+moment.locale('ar-TN'); //TN
+var id = new  Discord.RichEmbed()
+.setColor("RANDOM")
+.setAuthor(`${heg.username}#${heg.discriminator} `,heg.avatarURL)
+.setDescription([`**الوقت**${moment().format('HH:mm:ss A')}${moment().format('YYYY/M/D')}**اليوم** :${moment().format('dddd')}**التاريخ**`])
+message.channel.send(id)
+};
+});
 
 
 client.login(process.env.BOT_TOKEN);
