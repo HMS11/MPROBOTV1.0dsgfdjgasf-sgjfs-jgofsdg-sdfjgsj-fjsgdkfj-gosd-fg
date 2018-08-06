@@ -190,6 +190,7 @@ client.on('message', message => {
                         .addField("**STREAMING  :space_invader: **","** **")
          message.channel.send({embed:embed});
                         }
+	
    if (message.content.startsWith(adminprefix + 'photostreaming')) {
       client.user.setPresence({
       status: 'dnd',
@@ -204,9 +205,8 @@ client.on('message', message => {
             small_image: `366835431037337600`,
             small_text: ' Take This ! ' ,
             large_image: `370451271133429760`,
-            large_text: `ҜṦẰ FOREVER ♥` }
-    
-      }
+            large_text: `ҜṦẰ FOREVER ♥` });
+	      }
  
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
