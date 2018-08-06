@@ -1415,7 +1415,7 @@ message.channel.sendFile(canvas.toBuffer());
 
 
 
-const moment = require('moment');//npm install moment
+
 client.on('message', message => {
              var prefix = "#"
 if (message.content.startsWith(prefix + "time")) {
