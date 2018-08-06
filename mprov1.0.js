@@ -208,16 +208,6 @@ client.on('message', message => {
     
       }
  
-      if(!message.channel.guild) return;
-                            var msg = `${Date.now() - message.createdTimestamp}`
-                            var api = `${Math.round(client.ping)}`
-                            if (message.author.bot) return;
-                        let embed = new Discord.RichEmbed()
-                        .setAuthor(message.author.username,message.author.avatarURL)
-                        .setColor('RANDOM')
-                        .addField("**STREAMING  :space_invader: **","** **")
-         message.channel.send({embed:embed});
-                        }
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
       message.channel.send(`**Changing The Name To , :zap: ****${argresult}** `)
