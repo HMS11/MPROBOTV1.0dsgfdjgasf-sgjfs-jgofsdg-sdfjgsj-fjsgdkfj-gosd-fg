@@ -59,41 +59,6 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 
 client.on('message', message => {
-       const prefix = '#'
-   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('``**هذا الأمر مخصص للأدارة**``').then(m => m.delete(5000));
-if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('``**هذا الأمر مخصص للأدارة**`` `ADMINISTRATOR`' );
-let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let request = `Requested By ${message.author.username}`;
-message.channel.send(`**هل أنت متأكد من مسح الشات ؟**`).then(msg => {
-msg.react('✅')
-.then(() => msg.react('❌'))
-.then(() =>msg.react('✅'))
-
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-reaction1.on("collect", r => {
-message.channel.send(`يتم مسح الشات `).then(m => m.delete(5000));
-var msg;
-        msg = parseInt();
-
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-    message.channel.send(`**تم مسح الشات ** `);
-
-})
-reaction2.on("collect", r => {
-message.channel.send(`**مسح الشات الغي !**`).then(m => m.delete(5000));
-msg.delete();
-})
-})
-}
-});
-
-client.on('message', message => {
                                 if(!message.channel.guild) return;
                         if (message.content.startsWith('#ping')) {
                             if(!message.channel.guild) return;
@@ -118,8 +83,8 @@ command = command.slice(prefix.length);
 let args = message.content.split(" ").slice(1);
 if (command == "mute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``هذا الأمر مخصص للأدارة``").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``هذا الأمر مخصص للأدارة``").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
 if (!muteRole) return message.reply("** Role Not Find 'Muted' **").then(msg => {msg.delete(5000)});
@@ -139,8 +104,8 @@ var muteembeddm = new Discord.RichEmbed()
 }
 if (command == "unmute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``هذا الأمر مخصص للأدارة``").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``هذا الأمر مخصص للأدارة``").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
 if (!muteRole) return message.reply("** Role Not Find 'Muted' **").then(msg => {msg.delete(5000)});
@@ -322,13 +287,13 @@ const prefix = "#";
   if (command == "kick") {
                if(!message.channel.guild) return;
          
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``");
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("``هذا الأمر مخصص للأدارة``").then(msg => msg.delete(5000));
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("``هذا الأمر مخصص للأدارة``");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
   if (message.mentions.users.size < 1) return message.reply("**قم بعمل منشن**");
-  if(!reason) return message.reply ("**قم بكتابة  سبب المنشن من فضلك**");
+  if(!reason) return message.reply ("**قم بكتابة  سبب الطرد من فضلك**");
   if (!message.guild.member(user)
   .bannable) return message.reply("**لا يمكنك طرد الادارة !**");
 
@@ -484,7 +449,7 @@ client.on('message', function(message) {
             let play_info = new Discord.RichEmbed()
                 .setAuthor(client.user.username, client.user.avatarURL)
                 .setFooter('' + message.author.tag)
-                .setDescription('**,play [Link or query]**')
+                .setDescription('**#play [Link or query]**')
             message.channel.sendEmbed(play_info)
             return;
         }
@@ -915,21 +880,26 @@ client.on('messageUpdate', (message, newMessage) => {
 client.on('message', msg => {
     if(msg.content === '#staff') {
         
-        if(!msg.channel.guild) return msg.reply("``**هذا الأمر مخصص للأدارة**``")
-        let staff = msg.guild.member(msg.author).roles.find('name', '⚡');
+        if(!msg.channel.guild) return msg.reply("``هذا الأمر مخصص للأدارة``")
+        let staff = msg.guild.member(msg.author).roles.find('name', '.Admin');
        
-if(!staff) return msg.reply('``**هذا الأمر مخصص للأدارة**``')
+if(!staff) return msg.reply('``هذا الأمر مخصص للأدارة``')
 if (msg.author.bot) return;
   const embed = new Discord.RichEmbed()
             .setColor("RANDOM")
             .setThumbnail(msg.author.avatarURL)
                                 .setTitle("**أوامر الأداره**")
             .setDescription(`اهلاً ايها الأداري ${msg.author.tag}
-            هذه اوامر الأداره للتذكير
-            $ban
-            $kick
-            $mute
-            $unmute`)
+           ** #bc** : لأرسال رسالة لجميع اعضاء السيرفر
+          **  #clear** : لمسح الشات
+           ** #mute** : لأعطاء عضو كتم كتابي 
+          **  #unmute** : لأزالة الكتم الكتابي
+          **  #kick** : لطرد عضو
+         **   #bans** : لمعرفة الاعضاء المبندين
+
+
+
+`)
 
 
         msg.author.sendEmbed(embed)
@@ -944,7 +914,7 @@ if (msg.author.bot) return;
 
 
   client.on('messageUpdate', (oldRebel, newRebel) => {
-    console.log("-");
+    console.log("هناك عضو حاول النشر عبر تعديل الرسالة");
    if (newRebel.content.toUpperCase().match(/DISCORD.GG/i))
     {
         console.log(newRebel.author.name + " حاول النشر عبر تعديل الرسآلة - " + newRebel);
@@ -960,7 +930,7 @@ if (msg.author.bot) return;
 
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "restart")) {
-        if(message.author.id !== "459300517999411218") return message.reply('You aren\'t the bot owner.');
+        if(message.author.id !== "459300517999411218") return message.reply('**انت لست اونر البوت !**');
         message.channel.send('**Restarting.**').then(msg => {
             setTimeout(() => {
                msg.edit('**Restarting..**');
@@ -989,13 +959,13 @@ if (msg.author.bot) return;
  
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clear")) {
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('``**هذا الأمر مخصص للأدارة**``');
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('``هذا الأمر مخصص للأدارة``');
         var msg;
         msg = parseInt();
       
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
       message.channel.sendMessage("", {embed: {
-        title: "Done | تــم",
+        title: "انجز بنجاح :white_check_mark: ",
         color: 0x06DF00,
         description: "تم مسح الرسائل بنجاح",
         footer: {
@@ -1028,7 +998,7 @@ message.channel.stopTyping()
 client.on('message', message => {
         var  user = message.mentions.users.first() || message.author;
     if (message.content.startsWith("#avatar")) {
-message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
+message.channel.send(`**هذا الافاتار للمستخدم ${user} الرابط : ${user.avatarURL}**`);
 }
 });
 
@@ -1040,7 +1010,7 @@ message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
 
 
  client.on('message', async message => {
-            if(message.content.includes('discord.gg')){ 
+            if(message.content.includes('discord.gg/i')){ 
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
         if(!message.channel.guild) return;
         message.delete()
@@ -1066,7 +1036,7 @@ message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
            if(!message.channel.guild) return message.reply('** This command only for servers**');
      message.member.addRole(muterole);
     const embed500 = new Discord.RichEmbed()
-      .setTitle("Muted Ads")
+      .setTitle("تم أعطاء الميوت بنجاح :white_check_mark: ")
             .addField(`**تم أعطائك ميوت كتابي !**` , `**السبب = نشر سيرفرات**`)
             .setColor("c91616")
             .setThumbnail(`${message.author.avatarURL}`)
@@ -1142,18 +1112,18 @@ client.on('message', message =>{
      
     if(cmd === `${prefix}report`){
         let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-        if(!rUser) return message.channel.send("Idk who 2 report ??");
+        if(!rUser) return message.channel.send("**قم بعمل منشن **");
         let reason = args.join(" ").slice(22);
-        if(!reason) return message.channel.send("What is the reason ??");
+        if(!reason) return message.channel.send("**قم بكتابه سبب الابلاغ  ``ارسال رابط الصورة مستحسن``");
     
         let reportEmbed = new Discord.RichEmbed()
-        .setTitle("User just reported...")
+        .setTitle("هناك ريبورت جديد")
         .setColor("#f7abab")
         .addField("- Reported User :", `${rUser} (${rUser.id})`)
         .addField("- Reported By :", `${message.author} (${message.author.id})`)
-        .addField("- Reported In :", message.channel)
-        .addField("- Report Time :", message.createdAt.toLocaleString(),true)
-        .addField("- Reason :", reason);
+        .addField("- تم الابلاغ في روم :", message.channel)
+        .addField("- وقت الابلاغ :", message.createdAt.toLocaleString(),true)
+        .addField("- السبب :", reason);
     
         let reportschannel = message.guild.channels.find(`name`, "reports");
         if(!reportschannel) return message.channel.send("You should to make `reports` channel.");
@@ -1180,14 +1150,14 @@ client.on('message', message => {
   if (command == "ban") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``");
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("``هذا الأمر مخصص للأدارة``");
   if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
   /*let b5bzlog = client.channels.find("name", "5bz-log");
   if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
+  if (message.mentions.users.size < 1) return message.reply("**قم بعمل منشن**");
+  if(!reason) return message.reply ("**اكتب سبب البان**");
   if (!message.guild.member(user)
   .bannable) return message.reply("**لا يمكنك تبنيد الادارة !**");
 
@@ -1197,9 +1167,9 @@ client.on('message', message => {
   .setAuthor(`BANNED!`, user.displayAvatarURL)
   .setColor("RANDOM")
   .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  .addField("**المستخدم:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**تم التبنيد بواسطة:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**السبب:**", '**[ ' + `${reason}` + ' ]**')
   message.channel.send({
     embed : banembed
   })
@@ -1213,8 +1183,8 @@ client.on('voiceStateUpdate', (old, now) => {
   const channel = client.channels.get('475246385017651201');
   const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
   const size = channel.name.match(/\[\s(\d+)\s\]/);
-  if (!size) return channel.setName(`Voice Online[${currentSize}]`);
-  if (currentSize !== size) channel.setName(`Voice Online: ${currentSize}`);
+  if (!size) return channel.setName(`Voice Online [${currentSize}] `);
+  if (currentSize !== size) channel.setName(`Voice Online [${currentSize}] `);
 });
 
 
@@ -1255,10 +1225,9 @@ client.on('message', message => {
             if (message.content.startsWith(prefix + "info")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
-.addField(' السيرفرات🌐',`[${client.guilds.size}]  `)
-.addField(' الاعضاء👥 ',` [${client.users.size}] `)
-.addField('الرومات📚 ',`[${client.channels.size}]`) 
-.addField(' البنق🚀 ',`[${Date.now() - message.createdTimestamp}]`) 
+.addField(' عدد الاعضاء المخدومين ',` [${client.users.size}] `)
+.addField('عدد الرومات ',`[${client.channels.size}]`) 
+.addField(' سرعة الاتصال ',`[${Date.now() - message.createdTimestamp}]`) 
 .setColor('#7d2dbe')
   message.channel.sendEmbed(embed);
     }
@@ -1275,7 +1244,7 @@ client.on('message', message => {
       let user = message.mentions.users.first() || message.author
       let personalInvites = invs.filter(i => i.inviter.id === user.id);
       let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-message.channel.send(`${user} has ${inviteCount} invites.`);
+message.channel.send(`**${user}قام بأحضار ${inviteCount} شخص.**`);
 });
   }
 });
@@ -1339,40 +1308,13 @@ client.on('message', function(message) {
         var iiMo = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setTimestamp()
-        .setTitle('``I have received a new DM !``')
+        .setTitle('**رسالة جديدة تم ارسالها للبوت**')
         .setThumbnail(`${message.author.avatarURL}`)
         .setDescription(`\n\n\`\`\`${message.content}\`\`\``)
-        .setFooter(`From **${message.author.tag} (${message.author.id})**`)
+        .setFooter(`تم ارسالها بواسطة **${message.author.tag} **`)
     client.channels.get("475920075811979264").send({embed:iiMo});
     }
 });
-
-
-
-
-
-
-
-client.on('message',function(message) {
-    if(!message.channel.guild) return undefined;
-    const swearWords = ["نيوك","قحبة","زب","كس"];
-    if (swearWords.some(word => message.content.includes(word)) ) {
-      message.delete()
-      message.reply("**رجائا عدم السب , :zap: **"); 
-    }
-  });
-
-
-
-client.on(`message`, message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes(`https://www.youtube.com/watch`)){
-    message.delete()
-    return message.reply(`**يمنع نشر روابط اليوتيوب **`)
-}
-});
-
-//ملاحظة : لو تبي تغير يعني مو يوتيوب اي شي تبيه فيس بوك الخ .. تغير كلمة يوتيوب
 
 
 
@@ -1425,21 +1367,16 @@ client.on('message', message => {
 
 
 client.on("guildCreate", guild => {
-    client.channels.get("475920075811979264").send(' ***  BOT  ***   **Join To**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+    client.channels.get("475920075811979264").send('**دخل البوت للسيرفر **[ ' + `${guild.name}` + ' ]   ,   **الأونر**  ' + ' [ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]  **|**  [ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]')
     });
     
     client.on("guildDelete", guild => {
-    client.channels.get("475920075811979264").send(' ***  BOT  ***   **Leave From**   ***[ ' + `${guild.name}` + ' ]***   ,   **  Owner  **  ' + ' ***[ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]***  **|**  ***[ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]***')
+    client.channels.get("475920075811979264").send('**خرج البوت من السيرفر **[ ' + `${guild.name}` + ' ]   ,   **الأونر**  ' + ' [ ' + '<@' + `${guild.owner.user.id}` + '>' + ' ]  **|**  [ ' + '<' + `${guild.owner.user.username}` + '>' + ' ]')
     });
 
 
 
 
-
-
-client.on("guildCreate", guild => {
-    console.log(` شخص ما اضاف بوت  في سيرفر اسمه ! ${guild.name} اونر سيرفر هو ${guild.owner.user.username}!`)
-  });
 
 
 
