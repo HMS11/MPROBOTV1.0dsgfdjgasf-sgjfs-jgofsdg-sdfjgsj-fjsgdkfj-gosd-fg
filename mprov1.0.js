@@ -118,8 +118,8 @@ command = command.slice(prefix.length);
 let args = message.content.split(" ").slice(1);
 if (command == "mute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You Need High Perm For Do That ").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("Bot Need high Perms For Do That ").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
 if (!muteRole) return message.reply("** Role Not Find 'Muted' **").then(msg => {msg.delete(5000)});
@@ -139,8 +139,8 @@ var muteembeddm = new Discord.RichEmbed()
 }
 if (command == "unmute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You Need High Perm For Do That").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("Bot Need high Perms For Do That").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
 if (!muteRole) return message.reply("** Role Not Find 'Muted' **").then(msg => {msg.delete(5000)});
@@ -293,9 +293,9 @@ client.on('message', message => {
 client.on('message', message => {
 	var prefix = "#";
   if (!message.content.startsWith(prefix)) return;
-  const verifed = ["389136174154907651"];
+  const verifed = ["459300517999411218"];
 if (message.content.startsWith(prefix + 'owner')) {
-if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`Owner HERE ! :x:`)
+if( verifed.some(word => message.author.id.includes(word)) ) {    return message.channel.sendMessage(`**OWNER , Verifed :white_check_mark: **`)
 } else {
    message.reply('**You Are Not OWNER !**' + '❌');   
 }
@@ -322,15 +322,15 @@ const prefix = "#";
   if (command == "kick") {
                if(!message.channel.guild) return;
          
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``").then(msg => msg.delete(5000));
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
-  if (message.mentions.users.size < 1) return message.reply("اكتب الاسم");
-  if(!reason) return message.reply ("اكتب سبب الطرد");
+  if (message.mentions.users.size < 1) return message.reply("**قم بعمل منشن**");
+  if(!reason) return message.reply ("**قم بكتابة  سبب المنشن من فضلك**");
   if (!message.guild.member(user)
-  .bannable) return message.reply(" لا يمكنك اعطاء كيك للأدارة");
+  .bannable) return message.reply("**لا يمكنك طرد الادارة !**");
 
   message.guild.member(user).kick(7, user);
 
@@ -915,10 +915,10 @@ client.on('messageUpdate', (message, newMessage) => {
 client.on('message', msg => {
     if(msg.content === '#staff') {
         
-        if(!msg.channel.guild) return msg.reply("هذا الأمر للسيرفرات فقط")
+        if(!msg.channel.guild) return msg.reply("``**هذا الأمر مخصص للأدارة**``")
         let staff = msg.guild.member(msg.author).roles.find('name', '⚡');
        
-if(!staff) return msg.reply('انت لست من الأداره')
+if(!staff) return msg.reply('``**هذا الأمر مخصص للأدارة**``')
 if (msg.author.bot) return;
   const embed = new Discord.RichEmbed()
             .setColor("RANDOM")
@@ -989,7 +989,7 @@ if (msg.author.bot) return;
  
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clear")) {
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **ليس لديك صلاحيات**');
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('``**هذا الأمر مخصص للأدارة**``');
         var msg;
         msg = parseInt();
       
@@ -1012,7 +1012,7 @@ if (msg.author.bot) return;
 
 
   client.on('message', message => {
-if(message.content == '<@459300517999411218>') {
+if(message.content == '<@474311458323300362>') {
 message.channel.startTyping()
 setTimeout(() => { 
 message.channel.stopTyping()
@@ -1067,13 +1067,13 @@ message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
      message.member.addRole(muterole);
     const embed500 = new Discord.RichEmbed()
       .setTitle("Muted Ads")
-            .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
+            .addField(`**تم أعطائك ميوت كتابي !**` , `**السبب = نشر سيرفرات**`)
             .setColor("c91616")
             .setThumbnail(`${message.author.avatarURL}`)
             .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${message.guild.name} `)
      message.channel.send(embed500)
-     message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
+     message.author.send('`انت معاقب ميوت كتابي لو كان عن طريق الخطأ تواصل مع الاونر`');
    
        
     }
@@ -1180,7 +1180,7 @@ client.on('message', message => {
   if (command == "ban") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("``**هذا الأمر مخصص للأدارة**``");
   if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -1189,7 +1189,7 @@ client.on('message', message => {
   if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
   if(!reason) return message.reply ("**اكتب سبب الطرد**");
   if (!message.guild.member(user)
-  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  .bannable) return message.reply("**لا يمكنك تبنيد الادارة !**");
 
   message.guild.member(user).ban(7, user);
 
@@ -1234,16 +1234,16 @@ client.on('message', message => {
     )
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-          .setDescription(" تم أرسال الرابط برسالة خاصة ")
+          .setDescription("من فضلك تفقد الخاص ")
            .setAuthor(client.user.username, client.user.avatarURL)
                  .setAuthor(client.user.username, client.user.avatarURL)
-                .setFooter('طلب بواسطة: ' + message.author.tag)
+                .setFooter('' + message.author.tag)
 
       message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
         
-    .setDescription(" مدة الرابط : ساعه  عدد استخدامات الرابط : 1 ")
+    .setDescription("**هذا الرابط صالح لمدة ساعة واحدة ولأستخدام واحد**")
       message.author.sendEmbed(Embed11)
     }
 	
@@ -1296,65 +1296,25 @@ client.on('message', message => {
            .setThumbnail(message.author.avatarURL)
                  .setTimestamp()
     .setDescription(`
-***
-:white_small_square:  ( اوامر الادارة***
-**
-:small_orange_diamond:   البوت يكتب الي ��نت تكتبه في صورة
-$say
-:small_orange_diamond:   لمسح الشات
-$clear
-:small_orange_diamond:   للباند
-$ban
-:small_orange_diamond:   للطرد
-$kick
-:small_orange_diamond:   للارسال لاعضاء السيرفر بشكل مطور
-$bc
-:small_orange_diamond:   للارسال لاعضاء السيرفر بشكل عادي
-$bcr
-:small_orange_diamond:   لأعطاء شخص ميوت بالسيرفر - يلزم ان يكون بالسيرفر رتبة Muted
-$mute
-:small_orange_diamond:   لفك الميوت عن شخص
-$unmute
-:small_orange_diamond:   لااعطاء شخص رتبه
-$role humans [role]
-:small_orange_diamond:   لااعطاء الجميع رتبه
-$role all [role]
-:small_orange_diamond:   لااعطاء البوتات رتبه
-$role bots [role]
-----
-**
-***
-:white_small_square: ( الاوامر العامة***
-**
-:small_blue_diamond:  للابلغ عن شخص
-$report
-:small_blue_diamond:  لعرض التاريخ والوقت 
-$day
-:small_blue_diamond:  للارسال اقتراح للادراه
-$suggest
-:small_blue_diamond:  معلومات السيرفر
-$server
-:small_blue_diamond:  لعرض اسكنك في ماين كرافت بشكل مطور
-$mc3d
-:small_blue_diamond:   اسكنك في ماين كرافت
-$mcskin
-:small_blue_diamond:   راس اسكنك في ماين كرافت
-$skin
-:small_blue_diamond:   اسئله عن ماين كرافت
-$minecraft
-:small_blue_diamond:   لااستعراض الحاسبه
-$calculate
-:small_blue_diamond:   احصائيات فورت نايت
-$fortnite
- ----
-رابط سيرفر البوت
- 
-----------
-رابط دعوة البوت
+#ping = لمعرفة سرعة استجابة البوت :zap:
+#colors = لأظهار قائمة الالوان
+#color لأختيار لون
+#staff لمعرفة اوامر الادارة
+#avatar عشان البوت يرسل رابط صورتك
+#user لمعرفة معلوماتك في السيرفر
+#report لأرسال ابلاغ للأدارة
+رابط = عشان يرسل لك رابط دعوة لشخص واحد لمدة ثلاث ساعات
+#info لمعرفة معلومات عن البوت
+#invites لمعرفة عدد الاشخاص اللي جبتهم للسيرفر
+اوامر الموسيقى  :notes: 
 
-
-**
-
+#play
+#skip
+#volume
+#pause
+#resume
+#join
+#leave
 `)
 .setColor('RANDOM')
 message.author.sendEmbed(embed)
