@@ -191,23 +191,7 @@ client.on('message', message => {
          message.channel.send({embed:embed});
                         }
 	
-   if (message.content.startsWith(adminprefix + 'photostreaming')) {
-      client.user.setPresence({
-      status: 'dnd',
-      game: { 
-         type: 0,
-         name: 'Surprise Mother Fucker :) ',
-         details: `I'm : KBOOSH - Developer and Programmer`,
-         url: 'http://twitch.tv/Streammingg',
-         state: `إنْ لَمْ تَجِد لكْ حآقدْ إعلمْ أنْك إنسآن فآشِلْ`,
-        application_id: '281376075802476544',
-         assets: {
-            small_image: `366835431037337600`,
-            small_text: ' Take This ! ' ,
-            large_image: `370451271133429760`,
-            large_text: `ҜṦẰ FOREVER ♥` });
-	      }
- 
+
   if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
       message.channel.send(`**Changing The Name To , :zap: ****${argresult}** `)
