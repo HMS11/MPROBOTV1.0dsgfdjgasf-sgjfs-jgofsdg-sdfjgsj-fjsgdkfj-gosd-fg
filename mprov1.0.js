@@ -1439,7 +1439,7 @@ moment.locale('ar-TN'); //TN
 var id = new  Discord.RichEmbed()
 .setColor("RANDOM")
 .setAuthor(`${heg.username}#${heg.discriminator} `,heg.avatarURL)
-.setDescription([`**الوقت**${moment().format('HH:mm:ss A')}${moment().format('YYYY/M/D')}**اليوم** :${moment().format('dddd')}**التاريخ**`])
+.setDescription([`**Time**${moment().format('HH:mm:ss A')}${moment().format('YYYY/M/D')}**Day** :${moment().format('dddd')}**Date**`])
 message.channel.send(id)
 };
 });
