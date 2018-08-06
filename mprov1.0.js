@@ -1295,8 +1295,7 @@ client.on('message', message => {
           .setAuthor(message.author.username, message.author.avatarURL)
            .setThumbnail(message.author.avatarURL)
                  .setTimestamp()
-    .setDescription(`
-____ _ _                  ____            _                 
+    .setDescription(`____ _ _                  ____            _                 
   / ___(_) | ___  ___       / ___| _   _ ___| |_ ___ _ __ ___  
  | |   | | |/ _ \/ _ \      \___ \| | | / __| __/ _ \ '_ ` _ \ 
  | |___| | |  __/ (_) |  _   ___) | |_| \__ \ ||  __/ | | | | |
