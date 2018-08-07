@@ -1439,4 +1439,18 @@ message.channel.startTyping();
 
 
 
+
+
+client.on('message', eyad => {
+  let args = eyad.content.split(" ").slice(1).join(" ")
+  if (eyad.content.startsWith(`#who`)) {
+                if(!args) return eyad.channel.send('`ادخل الايدي الذي تريد منشنته`');
+  eyad.channel.send(`هذا هو الشخص المطلوب <@${args}>`)
+
+       }
+
+       });
+
+
+
 client.login(process.env.BOT_TOKEN);
