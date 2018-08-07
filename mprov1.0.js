@@ -1394,7 +1394,7 @@ message.channel.send(`** ${args}**`);
 
 
 
-const ytdl = require('ytdl-core');
+
 
 client.on('message', message => {
   if (message.content.startsWith('رحب')) {
