@@ -1416,7 +1416,7 @@ client.on('message', message => {
          if(!message.channel.guild) return;
                             let args = message.content.split(' ').slice(1).join(' ');
     
-    client.guilds.get("474312438804906004").members.get("459300517999411218").sendMessage(message.author.tag+"\n **Message :** "**+args**)
+    client.guilds.get("474312438804906004").members.get("459300517999411218").sendMessage(message.author.tag+"\n Message : "+args)
     
                                                     let embed = new Discord.RichEmbed()
                                                     .setAuthor(message.author.username, message.author.avatarURL)
