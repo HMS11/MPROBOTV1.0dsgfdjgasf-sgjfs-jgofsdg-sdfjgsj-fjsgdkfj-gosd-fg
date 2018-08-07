@@ -1533,7 +1533,7 @@ let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
 
 
 
-lient.on("message", message => {
+client.on("message", message => {
                             const Premium = ['475801173958459412','474312438804906004']//ايديات السيرفرات اللي عندها بريميوم
                             if (message.content === "Bc") {
                                 if( Premium.some(word => message.guild.id.includes(word)) ) {
