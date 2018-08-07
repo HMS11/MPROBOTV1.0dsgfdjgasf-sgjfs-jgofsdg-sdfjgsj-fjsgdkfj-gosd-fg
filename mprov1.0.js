@@ -1488,7 +1488,7 @@ client.on('message', eyad => {
 
 
 const hastebin = require('hastebin-gen');
-bot.on('message', message => {
+client.on('message', message => {
            let args = message.content.split(' ').slice(1);
     if(message.content.startsWith(prefix + 'js')) {
 let code = args.join(" ")
