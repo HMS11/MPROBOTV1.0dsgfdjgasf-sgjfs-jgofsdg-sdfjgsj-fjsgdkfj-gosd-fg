@@ -1453,4 +1453,146 @@ client.on('message', eyad => {
 
 
 
+
+client.on('message', eyadandr3d => {
+  let args = eyadandr3d.content.split(" ").slice(1).join(" ")
+  if (eyadandr3d.content.startsWith(`#serveravatar`)) {
+                if (!eyadandr3d.member.hasPermission("ADMINISTRATOR")) return eyadandr3d.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
+                if(!args) return eyadandr3d.channel.send('`ضع رابط الصوره`');
+                eyadandr3d.guild.owner.send(`تم تغييرصوره السرفر الي ${args}
+                بواسطة : <@${eyadandr3d.author.id}>`)
+            eyadandr3d.guild.setIcon(args)
+                eyadandr3d.channel.send(`تم تغيير صوره السرفر الي  __${args}__ `);
+                
+       }
+
+       });
+
+
+
+
+client.on('message', eyad => {
+  let args = eyad.content.split(" ").slice(1).join(" ")
+  if (eyad.content.startsWith(`#servername`)) {
+                if (!eyad.member.hasPermission("ADMINISTRATOR")) return eyad.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
+                if(!args) return eyad.channel.send('`يرجي ادخال اسم السرفر الجديد`');
+                eyad.guild.owner.send(`تم تغيير اسم السرفر الي ${args}
+                بواسطة : <@${eyad.author.id}>`)
+                eyad.guild.setName(args)
+                eyad.channel.send(` تم تغيير الاسم الي __${args}__ `);
+                
+       }
+
+       });
+
+
+
+const hastebin = require('hastebin-gen');
+bot.on('message', message => {
+           let args = message.content.split(' ').slice(1);
+    if(message.content.startsWith(prefix + 'js')) {
+let code = args.join(" ")
+hastebin(code, "js").then(r => {
+    message.channel.send(r);
+}).catch(console.error);
+}});
+
+
+
+
+
+
+
+let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
+ client.on("message", message => {
+   if (!message.content.startsWith(prefix)) return;
+   if (message.author.bot) return; 
+
+   if (!points[message.author.id]) points[message.author.id] = {
+     points: 0,
+     level: 0
+   };
+   let userData = points[message.author.id];
+   userData.points++;
+ 
+   let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+   if (curLevel > userData.level) {
+     // Level up message
+     userData.level = curLevel;
+     message.channel.send(`**🆙 | ${message.author.username} You leveled up to ${curLevel}**`);
+   }
+   if (message.content.startsWith(prefix + "level")) {
+     message.channel.send(`**${message.author.username} You are level is ${userData.level}**`);
+   }
+   fs.writeFile("./level.json", JSON.stringify(points), (err) => {
+     if (err) console.error(err)
+   });
+ 
+ });
+
+
+
+
+lient.on("message", message => {
+                            const Premium = ['475801173958459412','474312438804906004']//ايديات السيرفرات اللي عندها بريميوم
+                            if (message.content === "Bc") {
+                                if( Premium.some(word => message.guild.id.includes(word)) ) {
+
+        message.channel.send('ماني فاضي لك -_-')
+
+                                } else {
+   message.channel.send('**Premium Only! 🙃**').then(message => {message.delete(1000)});
+}
+                          }
+                      });
+
+const perfix = '#';
+client.on('message', msg => {
+ if (msg.content.startsWith(prefix + 'send')) {
+      let args = msg.content.split(' ').slice(1)
+      if (!args[0]) return msg.reply(`**منشن الشخص اولا**`)
+      if (!args[1]) return msg.reply(`**ما هي الرساله المطلوب ارسالها**`)
+      let norElden = msg.mentions.members.first()
+      if (!norElden) return msg.reply(`**يجب تحديد الشخص**`)
+      let norEldenEmbed = new Discord.RichEmbed()
+      .setTitle(`**رسالة جديده لك من شخص ما**`)
+      .setDescription(args.join(" "))
+
+      client.users.get(`${norElden.id}`).send(norEldenEmbed)
+      msg.reply(`**تم ارسال الرساله**`)
+    }
+});
+
+
+
+
+
+
+
+
+client.on("channelCreate",  cc => {
+  const channel = cc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(cc.guild.name)
+  .setDescription(`***Channel Created Name : *** **${cc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+   client.on("deleteChannel",  dc => {
+  const channel = dc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(dc.guild.name)
+  .setDescription(`***Channel Deleted Name : *** **${dc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+
 client.login(process.env.BOT_TOKEN);
