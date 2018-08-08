@@ -1535,10 +1535,10 @@ let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
 
 client.on("message", message => {
                             const Premium = ['475801173958459412','474312438804906004']//ايديات السيرفرات اللي عندها بريميوم
-                            if (message.content === "Bc") {
+                            if (message.content === "#premuim") {
                                 if( Premium.some(word => message.guild.id.includes(word)) ) {
 
-        message.channel.send('ماني فاضي لك -_-')
+        message.channel.send('premuim user ,')
 
                                 } else {
    message.channel.send('**Premium Only! 🙃**').then(message => {message.delete(1000)});
