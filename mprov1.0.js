@@ -1566,7 +1566,7 @@ client.on('message', msg => {
 
 
 
-client.on('message', message => {
+client.on('message', msg => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
