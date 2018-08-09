@@ -1867,7 +1867,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 
 
 
-
+const YTDL = require('ytdl-core');
 
 
 client.login(process.env.BOT_TOKEN);
