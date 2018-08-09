@@ -1576,7 +1576,7 @@ client.on('message', message => {
   let args = message.content.split(" ").slice(1);
 
   if (command == "#say") {
-   message.channel.sendMessage(args.join("  "))
+   message.channel.sendMessage(args.join(" "))
   }
 });
 
@@ -1694,7 +1694,7 @@ client.on('message', message => {
 if (command == "say") {
 let rank = message.guild.member(message.author).roles.find('name', 'VERIFED,CILEO .');
 if (!rank) return message.reply('``اهذا الامر مخصص للأدارة !``')
-  message.channel.send(args.join("  "))
+  message.channel.send(args.join("**  **"))
     message.delete();
   }
 
