@@ -1649,6 +1649,37 @@ if(msg.content === prefix + "ازعاج") {
 
 
 
+
+
+
+
+
+
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+
+
+if (command == "#vip") {
+let rank = message.guild.member(message.author).roles.find('name', 'VERIFED,CILEO .');
+if (!rank) return message.reply('PREMUIM USER **SOON**')
+  message.channel.send(args.join("  "))
+    message.delete();
+  }
+
+
+});
+
+
+
+
+
 client.on('message', message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
@@ -1662,7 +1693,7 @@ client.on('message', message => {
 
 if (command == "say") {
 let rank = message.guild.member(message.author).roles.find('name', 'VERIFED,CILEO .');
-if (!rank) return message.reply('انت لا تمتلك الرتبه المخصصه لهذا الامر')
+if (!rank) return message.reply('``اهذا الامر مخصص للأدارة !``')
   message.channel.send(args.join("  "))
     message.delete();
   }
@@ -1698,7 +1729,7 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
 
 
 
-const streamOptions = { seek : 0, volume : 0.20}
+const streamOptions = { seek : 0, volume : 0.5}
 client.on('voiceStateUpdate', (oldMember, newMember) => {
         let newUserChannel = newMember.voiceChannel
         let oldUserChannel = oldMember.voiceChannel
@@ -1706,16 +1737,16 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 
         if(oldUserChannel === undefined &&  newUserChannel !== undefined && newMember.id === '459300517999411218') {
 
-            console.log("user joined");
+            console.log("THE OWNER JOINED VOICE ROOM !");
             newMember.voiceChannel.join()
                 .then(connection => {
-                    const stream = YTDL('https://www.youtube.com/watch?v=mIUKGKwBRk8', {filter : 'audioonly'});
+                    const stream = YTDL('https://www.youtube.com/watch?v=rIhx2wZ8jnA', {filter : 'audioonly'});
                     const dispatcher = connection.playStream(stream, streamOptions)
             })
             .catch(console.error);
     }   else if(newUserChannel === undefined && oldMember.id === '459300517999411218'){
         
-        console.log("user left");
+        console.log("THE OWNER LEAVED VOICE ROOM !");
         oldMember.voiceChannel.leave();
     }
 })
