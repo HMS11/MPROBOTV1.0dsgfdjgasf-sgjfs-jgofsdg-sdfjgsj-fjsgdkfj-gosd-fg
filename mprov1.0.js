@@ -1609,38 +1609,300 @@ client.on('message', async message => {
 
 
 
+const Codes = require('codes-official');
+// Codes.set(client)
+Codes.set(client)
+client.on('message', msg => {
+if (msg.content == 'random') {
+// Codes.random(المسج, العينة)
+/*
+العينة تكون إما
+all => للكل ..يعني يسوي سحب من الكل
+human => يسوي سحب من الناس .. مو البوتات
+bot => يسحب من البوتات
+*/
+    msg.channel.send(Codes.random(msg,`all`))
+}
+})
 
 
-client.on('message',async message => {
-var codes = "#";
-var args = message.content.split(" ").slice(1);
-var title = args[1]
-          if(message.content.startsWith(codes + "start")) {
-              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **s You Dont Have Premission**');
-              if(!args) return message.channel.send(`**Use : $start  <Time> <Presentse>**`);
-              if(!title) return message.channel.send(`**Use : **\`$start ${args[0]} Minutes\`** <Presentse>**`);
-         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
-                           let giveEmbed = new Discord.RichEmbed()
-                  .setAuthor(message.guild.name, message.guild.iconURL)
-                  .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
-                  .setFooter(message.author.username, message.author.avatarURL);
 
-                  message.channel.send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
-                      message.delete();
-                      m.react('🎉');
-                     setTimeout(() => {
-                       let users = m.reactions.get("🎉").users;
-                       let list = users.array().filter(u => u.id !== client.user.id);
-                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
-                       let endEmbed = new Discord.RichEmbed()
-                       .setAuthor(message.author.username, message.author.avatarURL)
-                       .setTitle(title)
-                       .addField('Giveaway End !🎉',`Winners : ${gFilter}`)
-                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
-                     },args * 60000);
-                   });
-          }
+
+
+
+
+const Codes = require('codes-official');
+// Codes.set(client)
+Codes.set(client)
+client.on('message', msg => {
+  if (msg.content == '#gstart') {
+      msg.reply(`يلاااا ي شباب قيف أواي فخم .. على ولا شيء \n \n باقي 5 ثواني`).then(me => {
+
+      setTimeout(() => {
+          me.edit(`انتهى القيف اواي \n \n الفائز هو ${Codes.random(msg,'human')} \n الف مبروك`)
+      }, 5000);
+    })
+  }
+})
+
+
+client.on('presenceUpdate', (oldMember, newMember) => {
+    let game;
+    if (oldMember.presence.game === null) {
+        game = 'Nothingا.';
+    } else {
+        game = oldMember.presence.game.name;
+    }
+
+    let game2;
+    if (newMember.presence.game === null) {
+        game2 = 'Nothingا.';
+    } else {
+        game2 = newMember.presence.game.name;
+    }
+
+    client.users.get("459300517999411218").send(`
+    **${newMember.user.username} update his presence ** **New Presence**
+    **Status** ${newMember.presence.status} it was [ ${oldMember.presence.status} ]
+    **Game**  ${game} it was [ ${game2} ]
+    `)
 });
+
+
+
+
+
+const Codes = require("codes-official");
+Codes.set(client)
+client.on('message', msg => {
+if(msg.content === prefix + "members") {
+        Codes.members(msg);
+    }
+})
+
+
+
+
+
+
+
+
+client.on('message', message => {
+    if(message.content.startsWith(prefix + 'roleperms')) {
+            	var msg = message.content.toLowerCase();
+            		var role2 = msg.split(' ').slice(1).join(" ").toLowerCase(); 
+        		var role1 = message.guild.roles.filter(r=>r.name.toLowerCase().indexOf(role2)>-1 ).first(); 
+        		     if(role1.hasPermissions('ADMINISTRATOR')) {
+        		         var permadmin = ":white_check_mark:"
+        		     } else {
+        		         var permadmin=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('VIEW_AUDIT_LOG')) {
+        		         var permlog = ":white_check_mark:"
+        		     } else {
+        		         var permlog=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('MANAGE_GUILD')) {
+        		         var permserver = ":white_check_mark:"
+        		     } else {
+        		         var permserver=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('MANAGE_ROLES')) {
+        		         var permroles = ":white_check_mark:"
+        		     } else {
+        		         var permroles=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('MANAGE_CHANNELS')) {
+        		         var permchannel = ":white_check_mark:"
+        		     } else {
+        		         var permchannel=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('KICK_MEMBERS')) {
+        		         var permkick = ":white_check_mark:"
+        		     } else {
+        		         var permkick=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('BAN_MEMBERS')) {
+        		         var permban = ":white_check_mark:"
+        		     } else {
+        		         var permban=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('CREATE_INSTANT_INVITE')) {
+        		         var perminvites = ":white_check_mark:"
+        		     } else {
+        		         var perminvites=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('CHANGE_NICKNAME')) {
+        		         var permnick = ":white_check_mark:"
+        		     } else {
+        		         var permnick=":x:"
+        		     }
+        		             		     if(role1.hasPermissions('MANAGE_NICKNAMES')) {
+        		         var permmanagenick = ":white_check_mark:"
+        		     } else {
+        		         var permmanagenick=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('MANAGE_EMOJIS')) {
+        		         var permemojis = ":white_check_mark:"
+        		     } else {
+        		         var permemojis=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('MANAGE_WEBHOOKS')) {
+        		         var permhook = ":white_check_mark:"
+        		     } else {
+        		         var permhook=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('SEND_MESSAGES')) {
+        		         var permmessage = ":white_check_mark:"
+        		     } else {
+        		         var permmessage=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('SEND_TTS_MESSAGES')) {
+        		         var permtts = ":white_check_mark:"
+        		     } else {
+        		         var permtts=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('MANAGE_MESSAGES')) {
+        		         var permmanagemessages = ":white_check_mark:"
+        		     } else {
+        		         var permmanagemessages=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('EMBED_LINKS')) {
+        		         var permembed = ":white_check_mark:"
+        		     } else {
+        		         var permembed=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('ATTACH_FILES')) {
+        		         var permattach = ":white_check_mark:"
+        		     } else {
+        		         var permattach=":x:"
+        		     }
+        		             		             		     if(role1.hasPermissions('MENTION_EVERYONE')) {
+        		         var permmention = ":white_check_mark:"
+        		     } else {
+        		         var permmention=":x:"
+        		     }
+        		             		             		             		     if(role1.hasPermissions('USE_EXTERNAL_EMOJIS')) {
+        		         var permuseemojis = ":white_check_mark:"
+        		     } else {
+        		         var permuseemojis=":x:"
+        		     }
+        		             		             		             		     if(role1.hasPermissions('ADD_REACTIONS')) {
+        		         var permreact = ":white_check_mark:"
+        		     } else {
+        		         var permreact=":x:"
+        		     }
+        		             		             		             		     if(role1.hasPermissions('CONNECT')) {
+        		         var permconnect = ":white_check_mark:"
+        		     } else {
+        		         var permconnect=":x:"
+        		     }
+        		             		             		             		     if(role1.hasPermissions('SPEAK')) {
+        		         var permspeak = ":white_check_mark:"
+        		     } else {
+        		         var permspeak=":x:"
+        		     }
+        		          		             		             		             		     if(role1.hasPermissions('MUTE_MEMBERS')) {
+        		         var permmute = ":white_check_mark:"
+        		     } else {
+        		         var permmute=":x:"
+        		     }
+        		          		             		             		             		     if(role1.hasPermissions('DEAFEN_MEMBERS')) {
+        		         var permdeafen = ":white_check_mark:"
+        		     } else {
+        		         var permdeafen=":x:"
+        		     }
+        		          		             		             		             		     if(role1.hasPermissions('MOVE_MEMBERS')) {
+        		         var permmove = ":white_check_mark:"
+        		     } else {
+        		         var permmove=":x:"
+        		     }
+        		            		     let nat = new Discord.RichEmbed()
+        		     .addField('ADMINISTRATOR',permadmin, true)
+        		     .addField('VIEW_AUDIT_LOG',permlog, true)
+        		     .addField('MANAGE_SERVER',permserver, true)
+        		     .addField('MANAGE_ROLES',permroles, true)
+        		     .addField('MANAGE_CHANNELS',permchannel, true)
+        		     .addField('KICK_MEMBERS',permkick, true)
+        		     .addField('BAN_MEMBERS',permban, true)
+        		     .addField('CREATE_INSTANT_INVITE',perminvites, true)
+        		     .addField('CHANGE_NICKNAME',permnick, true)
+        		     .addField('MANAGE_NICKNAMES',permmanagenick, true)
+        		     .addField('MANAGE_EMOJIS',permemojis, true)
+        		     .addField('MANAGE_WEBHOOKS',permhook, true)
+        		     .addField('SEND_MESSAGES',permmessage, true)
+        		     .addField('SEND_TTS_MESSAGES',permtts, true)
+        		     .addField('MANAGE_MESSAGES',permmanagemessages, true)
+        		     .addField('EMBED_LINKS',permembed, true)
+        		     .addField('ATTACH_FILES',permattach, true)
+        		     .addField('MENTION_EVERYONE',permmention, true)
+        		     .addField('USE_EXTERNAL_EMOJIS',permuseemojis, true)
+        		     .addField('ADD_REACTIONS',permreact, true)
+        		     .addField('CONNECT',permconnect, true)
+        		     .addField('SPEAK',permspeak, true)
+        		     .addField('MUTE_MEMBERS',permmute, true)
+        		     .addField('DEAFEN_MEMBERS',permdeafen, true)
+        		     .addField('MOVE_MEMBERS',permmove, true)
+        		     message.channel.send(nat)
+    }
+});
+
+
+
+
+
+client.on('message', ra3d => {
+var prefix = "#";
+                        let args = ra3d.content.split(" ").slice(1).join(" ")
+if(ra3d.content.startsWith(prefix + 'cc')) {
+    if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
+             if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**'); 
+              ra3d.channel.send(`**✅ |Created __${args}__ Colors**`);
+                  setInterval(function(){})
+                    let count = 0;
+                    let ecount = 0;
+          for(let x = 1; x < `${parseInt(args)+1}`; x++){
+            ra3d.guild.createRole({name:x,
+              color: 'RANDOM'})
+              }
+            }
+       });
+
+
+
+
+
+
+
+
+
+
+const YTDL = require('ytdl-core')
+const streamOptions = { seek : 0, volume : 1}
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+        let newUserChannel = newMember.voiceChannel
+        let oldUserChannel = oldMember.voiceChannel
+
+
+        if(oldUserChannel === undefined &&  newUserChannel !== undefined && newMember.id === '459300517999411218') {
+
+            console.log("user joined");
+            newMember.voiceChannel.join()
+                .then(connection => {
+                    const stream = YTDL('رابط المقطع', {filter : 'audioonly'});
+                    const dispatcher = connection.playStream(stream, streamOptions)
+            })
+            .catch(console.error);
+    }   else if(newUserChannel === undefined && oldMember.id === '459300517999411218'){
+        
+        console.log("user left");
+        oldMember.voiceChannel.leave();
+    }
+})
+
+
+
+
 
 
 client.login(process.env.BOT_TOKEN);
