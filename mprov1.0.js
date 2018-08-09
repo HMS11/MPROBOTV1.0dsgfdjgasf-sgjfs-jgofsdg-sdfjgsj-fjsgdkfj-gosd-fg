@@ -1609,41 +1609,7 @@ client.on('message', async message => {
 
 
 
-const Codes = require('codes-official');
-// Codes.set(client)
-Codes.set(client)
-client.on('message', msg => {
-if (msg.content == 'random') {
-// Codes.random(المسج, العينة)
-/*
-العينة تكون إما
-all => للكل ..يعني يسوي سحب من الكل
-human => يسوي سحب من الناس .. مو البوتات
-bot => يسحب من البوتات
-*/
-    msg.channel.send(Codes.random(msg,`all`))
-}
-})
 
-
-
-
-
-
-
-const Codes = require('codes-official');
-// Codes.set(client)
-Codes.set(client)
-client.on('message', msg => {
-  if (msg.content == '#gstart') {
-      msg.reply(`يلاااا ي شباب قيف أواي فخم .. على ولا شيء \n \n باقي 5 ثواني`).then(me => {
-
-      setTimeout(() => {
-          me.edit(`انتهى القيف اواي \n \n الفائز هو ${Codes.random(msg,'human')} \n الف مبروك`)
-      }, 5000);
-    })
-  }
-})
 
 
 client.on('presenceUpdate', (oldMember, newMember) => {
@@ -1877,7 +1843,6 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
 
 
 
-const YTDL = require('ytdl-core')
 const streamOptions = { seek : 0, volume : 1}
 client.on('voiceStateUpdate', (oldMember, newMember) => {
         let newUserChannel = newMember.voiceChannel
