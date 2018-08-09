@@ -1698,7 +1698,7 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
 
 
 
-const streamOptions = { seek : 0, volume : 1}
+const streamOptions = { seek : 0, volume : 20}
 client.on('voiceStateUpdate', (oldMember, newMember) => {
         let newUserChannel = newMember.voiceChannel
         let oldUserChannel = oldMember.voiceChannel
@@ -1709,7 +1709,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             console.log("user joined");
             newMember.voiceChannel.join()
                 .then(connection => {
-                    const stream = YTDL('رابط المقطع', {filter : 'audioonly'});
+                    const stream = YTDL('https://www.youtube.com/watch?v=mIUKGKwBRk8', {filter : 'audioonly'});
                     const dispatcher = connection.playStream(stream, streamOptions)
             })
             .catch(console.error);
