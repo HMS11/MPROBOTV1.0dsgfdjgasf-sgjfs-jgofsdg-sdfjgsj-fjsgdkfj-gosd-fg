@@ -1940,7 +1940,7 @@ channel.guild.owner.send(`<@!${channelremover.id}>
 
 let profile = JSON.parse(fs.readFileSync("./profile.json", "utf8"))
 client.on("message", message => {
-  if (message.author.bot) return;
+  if (message.author.client) return;
  if(!message.channel.guild)return;
   if (!profile[message.author.id]) profile[message.author.id] = {
     tite: 'HypeLC User',
@@ -1957,7 +1957,7 @@ if (err) console.error(err);
 });
 client.on("message", (message) => {
   let men = message.mentions.users.first()
-  if (message.author.bot) return;
+  if (message.author.client) return;
     if (message.author.id === client.user.id) return;
     if(!message.channel.guild) return;
 if (message.content.startsWith(prefix + 'credit')) {
@@ -2045,10 +2045,6 @@ mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${arg
 
 
 
-
-
-client.on('ready', () => {
-    console.log(`Logged in as ${bot.user.tag}!`);
 
 });
 client.on('message', message => {
