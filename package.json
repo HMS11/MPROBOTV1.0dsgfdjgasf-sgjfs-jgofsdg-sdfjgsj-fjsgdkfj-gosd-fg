@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "canvas": "^1.6.10",
+    "codes-official": "0.0.15"
     "discord.js": "^11.3.2",
     "discord.js-musicbot-addon": "^1.10.3",
     "express": "^4.16.3",
