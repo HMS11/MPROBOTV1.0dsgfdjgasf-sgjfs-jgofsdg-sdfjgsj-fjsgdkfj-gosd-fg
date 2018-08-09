@@ -1611,43 +1611,36 @@ client.on('message', async message => {
 
 
 
+client.on('message',async message => {
+var codes = "#";
+var args = message.content.split(" ").slice(1);
+var title = args[1]
+          if(message.content.startsWith(codes + "start")) {
+              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **s You Dont Have Premission**');
+              if(!args) return message.channel.send(`**Use : $start  <Time> <Presentse>**`);
+              if(!title) return message.channel.send(`**Use : **\`$start ${args[0]} Minutes\`** <Presentse>**`);
+         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+                           let giveEmbed = new Discord.RichEmbed()
+                  .setAuthor(message.guild.name, message.guild.iconURL)
+                  .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
+                  .setFooter(message.author.username, message.author.avatarURL);
 
-
-var userData = {};
-client.on("message", function(message){
-if (message.content.startsWith(prefix + "rank")) {
-    if (!userData[message.author.id]) {
-        userData[message.author.id] = {Money:0,Xp:0,Level:0}
-    }
-     var mentionned = message.mentions.users.first();
-
-      var edward;
-      if(mentionned){
-          var edward = mentionned;
-      } else {
-          var edward = message.author;
-
-      }
-
-    
-    var CulLevel = Math.floor(0.25 * Math.sqrt(userData[message.author.id].Xp +1));
-    if (CulLevel > userData[message.author.id].Level) {userData[message.author.id].Level +=CulLevel}
-    let edward = new Discord.RichEmbed()
-    .setColor("Random")
-    .addField("الأسم :", message.author.tag)
-    .addField("الليفل :", userData[message.author.id].Level)
-    .addField("الأكس بي :",Math.floor(userData[message.author.id].Xp))
-    message.channel.send(edward);
-}
-if (!userData[message.author.id]) {
-    userData[message.author.id] = {Money:0,Xp:0,Level:0,Like:0}
-    }
-
-userData[message.author.id].Xp+= 0.25;
-userData[message.author.id].Money+= 0.25;
-
+                  message.channel.send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
+                      message.delete();
+                      m.react('🎉');
+                     setTimeout(() => {
+                       let users = m.reactions.get("🎉").users;
+                       let list = users.array().filter(u => u.id !== client.user.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('Giveaway End !🎉',`Winners : ${gFilter}`)
+                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
+                     },args * 60000);
+                   });
+          }
 });
-
 
 
 client.login(process.env.BOT_TOKEN);
