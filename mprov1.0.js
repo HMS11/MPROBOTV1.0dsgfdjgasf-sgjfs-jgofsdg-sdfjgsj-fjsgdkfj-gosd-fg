@@ -1756,4 +1756,404 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 const YTDL = require('ytdl-core');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+client.on('message', async message => {
+    let args = message.content.split(" ");
+    let command = args[0];
+
+    if(command === prefix + 'tempban') {
+      if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply('``هذا الامر مخصص للأدارة``').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+
+      if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply('انا لا املك الصلاحيات اللازمة. يحب توفر صلاحيات `Ban Members , Embed Links`').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+
+      let mention = message.mentions.members.first();
+      if(!mention) return message.reply('**قم بعمل منشن**').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+      if(mention.highestRole.position >= message.guild.member(message.author).highestRole.positon) return message.reply('**لا يمكنك تبنيد الادارة**').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+      if(mention.highestRole.positon >= message.guild.member(client.user).highestRole.positon) return message.reply('**لا يمكنك تبنيد الادارة**').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+      if(mention.id === message.author.id) return message.reply('**لا يمكنك تبنيد  نفسك**').then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
+
+       let duration = args[2];
+       if(!duration) return message.reply('**حدد الوقت رجاءا**').then(msg => {
+         msg.delete(3500);
+         message.delete(3500);
+       });
+       if(isNaN(duration)) return message.reply('**حدد الوقت رجاءا**').then(msg => {
+         msg.delete(3500);
+         message.delete(3500);
+       });
+
+       let reason = message.content.split(" ").slice(3).join(" ");
+       if(!reason) reason = 'غير محدد';
+
+       let thisEmbed = new Discord.RichEmbed()
+       .setAuthor(mention.user.username , mention.user.avatarURL)
+       .setTitle('لقد تبندت من سيرفر')
+       .setThumbnail(mention.avatarURL)
+       .addField('# - السيرفر:',message.guild.name,true)
+       .addField('# - تم تبنيدك بواسطة',message.author,true)
+       .addField('# - السبب',reason)
+       .setFooter(message.author.tag,message.author.avatarURL);
+       mention.send(thisEmbed).then(() => {
+       mention.ban({
+         reason: reason,
+       });
+       message.channel.send(`**:white_check_mark: ${mention.user.username} banned from the server ! :airplane: **  `)
+       setTimeout(() => {
+         if(duration === 0) return;
+         message.guild.unban(mention);
+       },duration * 60000);
+     });
+   }
+});
+
+
+var guilds = {};
+client.on('guildBanAdd', function(guild) {
+            const rebellog = client.channels.find("name", "testlog"),
+            Onumber = 3,
+  Otime = 10000
+guild.fetchAuditLogs({
+    type: 22
+}).then(audit => {
+    let banner = audit.entries.map(banner => banner.executor.id)
+    let bans = guilds[guild.id + banner].bans || 0 
+    guilds[guild.id + banner] = {
+        bans: 0
+    }
+      bans[guilds.id].bans += 1; 
+if(guilds[guild.id + banner].bans >= Onumber) {
+try {
+let roles = guild.members.get(banner).roles.array();
+guild.members.get(banner).removeRoles(roles);
+  guild.guild.member(banner).kick();
+
+} catch (error) {
+console.log(error)
+try {
+guild.members.get(banner).ban();
+  rebellog.send(`<@!${banner.id}>
+حآول العبث بالسيرفر @everyone`);
+guild.owner.send(`<@!${banner.id}>
+حآول العبث بالسيرفر ${guild.name}`)
+    setTimeout(() => {
+ guilds[guild.id].bans = 0;
+  },Otime)
+} catch (error) {
+console.log(error)
+}
+}
+}
+})
+});
+ let channelc = {};
+  client.on('channelCreate', async (channel) => {
+  const rebellog = client.channels.find("name", "testlog"),
+  Oguild = channel.guild,
+  Onumber = 3,
+  Otime = 10000;
+  const audit = await channel.guild.fetchAuditLogs({limit: 1});
+  const channelcreate = audit.entries.first().executor;
+  console.log(` A ${channel.type} Channel called ${channel.name} was Created By ${channelcreate.tag}`);
+   if(!channelc[channelcreate.id]) {
+    channelc[channelcreate.id] = {
+    created : 0
+     }
+ }
+ channelc[channelcreate.id].created += 1;
+ if(channelc[channelcreate.id].created >= Onumber ) {
+    Oguild.members.get(channelcreate.id).kick();
+rebellog.send(`<@!${channelcreate.id}>
+حآول العبث بالسيرفر @everyone`);
+channel.guild.owner.send(`<@!${channelcreate.id}>
+حآول العبث بالسيرفر ${channel.guild.name}`)
+}
+  setTimeout(() => {
+ channelc[channelcreate.id].created = 0;
+  },Otime)
+  });
+
+let channelr = {};
+  client.on('channelDelete', async (channel) => {
+  const rebellog = client.channels.find("name", "testlog"),
+  Oguild = channel.guild,
+  Onumber = 3,
+  Otime = 10000;
+  const audit = await channel.guild.fetchAuditLogs({limit: 1});
+  const channelremover = audit.entries.first().executor;
+  console.log(` A ${channel.type} Channel called ${channel.name} was deleted By ${channelremover.tag}`);
+   if(!channelr[channelremover.id]) {
+    channelr[channelremover.id] = {
+    deleted : 0
+     }
+ }
+ channelr[channelremover.id].deleted += 1;
+ if(channelr[channelremover.id].deleted >= Onumber ) {
+  Oguild.guild.member(channelremover).kick();
+rebellog.send(`<@!${channelremover.id}>
+حآول العبث بالسيرفر @everyone`);
+channel.guild.owner.send(`<@!${channelremover.id}>
+حآول العبث بالسيرفر ${channel.guild.name}`)
+}
+  setTimeout(() => {
+ channelr[channelremover.id].deleted = 0;
+  },Otime)
+  });
+
+
+
+
+
+
+
+
+
+
+
+let profile = JSON.parse(fs.readFileSync("./profile.json", "utf8"))
+client.on("message", message => {
+  if (message.author.bot) return;
+ if(!message.channel.guild)return;
+  if (!profile[message.author.id]) profile[message.author.id] = {
+    tite: 'HypeLC User',
+    rep: 0,
+   reps: 'NOT YET',
+   lastDaily:'Not Collected',
+    level: 0,
+    points: 0,
+    credits: 1,
+  };
+fs.writeFile('./profile.json', JSON.stringify(profile), (err) => {
+if (err) console.error(err);
+})
+});
+client.on("message", (message) => {
+  let men = message.mentions.users.first()
+  if (message.author.bot) return;
+    if (message.author.id === client.user.id) return;
+    if(!message.channel.guild) return;
+if (message.content.startsWith(prefix + 'credit')) {
+  if(men) {
+  if (!profile[men.id]) profile[men.id] = {
+   lastDaily:'Not Collected',
+   credits: 1,
+ };
+  }
+  if(men) {
+message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${profile[men.id].credits}$` + "`.**")
+} else {
+ message.channel.send(`** ${message.author.username}, your :credit_card: balance` + " is `" + `${profile[message.author.id].credits}$` + "`.**")
+}
+}
+if(message.content.startsWith(prefix + "daily")) {
+
+
+  if(profile[message.author.id].lastDaily != moment().format('day')) {
+   profile[message.author.id].lastDaily = moment().format('day')
+   profile[message.author.id].credits += 310
+    message.channel.send(`**${message.author.username} you collect your \`310\` :dollar: daily pounds**`)
+} else {
+    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
+}
+}
+let cont = message.content.slice(prefix.length).split(" ");
+let args = cont.slice(2);
+let sender = message.author
+if(message.content.startsWith(prefix + 'trans')) {
+          if (!args[0]) {
+            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+         return;
+           }
+        // We should also make sure that args[0] is a number
+        if (isNaN(args[0])) {
+            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+            return; // Remember to return if you are sending an error message! So the rest of the code doesn't run.
+             }
+             if(profile[message.author.id].credits < args[0]) return message.channel.send("**Your Credits is not enough  that**")
+if(args[0].startsWith("-")) return  message.channel.send('**!! I Cant Do it**');
+				 let defineduser = '';
+            let firstMentioned = message.mentions.users.first();
+            defineduser = (firstMentioned)
+            if (!defineduser) return message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
+            if(defineduser.id === message.author.id) return message.channel.send("***Transfering to your self hah ?!***")
+            var mentionned = message.mentions.users.first();
+if (!profile[sender.id]) profile[sender.id] = {}
+if (!profile[sender.id].credits) profile[sender.id].credits = 310;
+fs.writeFile('./profile.json', JSON.stringify(profile), (err) => {
+if (err) console.error(err);
+})
+var x = ['5587' ,' 9978' , '3785' , '7734' , '9864' , '7681' , '3758' , '7834' , '3489' , '1382' , '7389' , '8762' , '0889' , '0388' , '3316' , '0976' , '8603' , '1842' , '4565' , '9524' , '9524' , '0964' , '5930' , '5678' , '9567' , '6099' , '7058' , '0001' , '1324' , '9834' , '7668' , '0378' , '7055' , '9733' , '9876' , '9846' , '9685' , '8574' , '8975' , '9845' , '9862' , '0069' , '0807' , '0673' , '0813' , '1235' , '6879'];
+var x2 = ['5587' ,' 9978' , '3785' , '7734' , '9864' , '7681' , '3758' , '7834' , '3489' , '1382' , '7389' , '8762' , '0889' , '0388' , '3316' , '0976' , '8603' , '1842' , '4565' , '9524' , '9524' , '0964' , '5930' , '5678' , '9567' , '6099' , '7058' , '0001' , '1324' , '9834' , '7668' , '0378' , '7055' , '9733' , '9876' , '9846' , '9685' , '8574' , '8975' , '9845' , '9862' , '0069' , '0807' , '0673' , '0813' , '1235' , '6879'];
+        var x3 = Math.floor(Math.random()*x.length)
+        message.channel.send(` \`${args}\`** : الملبغ**  \n \`${x[x3]}\` ** : اكتب الرقم التالي حتي تتم عملية التحويل **`).then(msg1=> { 
+        var r = message.channel.awaitMessages(msg => msg.content == x2[x3], { maxMatches : 1, time : 60000, errors : ['time'] })
+        r.catch(() => {
+            message.delete()
+            r.delete()
+            msg.delete()
+            message.channel.sendEmbed(embed)
+        })
+        r.then(s=> {
+      var mando = message.mentions.users.id;
+      if  (!profile[defineduser.id]) profile[defineduser.id] = {}
+      if (!profile[defineduser.id].credits) profile[defineduser.id].credits = 200;
+      profile[defineduser.id].credits += (+args[0]);
+      profile[sender.id].credits += (-args[0]);
+      let mariam = message.author.username
+message.channel.send(`**:moneybag: | ${message.author.username}, has transferrerd ` + "`" + args[0] + "$` to " + `<@${defineduser.id}>**`)
+mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${args[0]} from user ${message.author.username} ; (ID (${message.author.id})\`\`\``);
+               message.channel.sendEmbed(embed)
+        })
+        })
+        
+		
+
+
+
+
+}
+
+      });
+
+
+
+
+
+client.on('ready', () => {
+    console.log(`Logged in as ${bot.user.tag}!`);
+
+});
+client.on('message', message => {
+    if (message.content.startsWith("newid")) {
+      var args = message.content.split(" ").slice(1);
+      let user = message.mentions.users.first();
+      var men = message.mentions.users.first();
+         var heg;
+         if(men) {
+             heg = men
+         } else {
+             heg = message.author
+         }
+       var mentionned = message.mentions.members.first();
+          var h;
+         if(mentionned) {
+             h = mentionned
+         } else {
+             h = message.member
+         }
+
+var jimp = require('jimp')
+
+  moment.locale('ar-ly');
+const w = ['./ID1.png','./ID2.png','./ID3.png','./ID4.png',];
+
+        let Image = Canvas.Image,
+            canvas = new Canvas(500, 500),
+            ctx = canvas.getContext('2d');
+        ctx.patternQuality = 'bilinear';
+        ctx.filter = 'bilinear';
+        ctx.antialias = 'subpixel';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 2;
+        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+            if (err) return console.log(err);
+            let BG = Canvas.Image;
+            let ground = new Image;
+            ground.src = Background;
+            ctx.drawImage(ground, 0, 0, 500, 500);
+
+})
+
+                let url = h.user.displayAvatarURL.endsWith(".webp") ? h.user.displayAvatarURL.slice(5, -20) + ".png" : h.user.displayAvatarURL;
+                jimp.read(url, (err, ava) => {
+                    if (err) return console.log(err);
+                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                        if (err) return console.log(err);
+                        //ur name
+                        ctx.font = '23px BlowBrush';
+                        ctx.fontSize = '30px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(h.user.username, 137, 329);
+
+                        //discord
+                        ctx.font = '25px BlowBrush';
+                        ctx.fontSize = '30px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(`${moment(heg.createdTimestamp).fromNow()}` , 65, 375);
+
+                        //server
+                        ctx.font = '25px BlowBrush';
+                        ctx.fontSize = '30px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(`${moment(h.joinedAt).fromNow()}` , 70, 429);
+                             
+                        //Avatar
+                        let Avatar = Canvas.Image;
+                        let ava = new Avatar;
+                        ava.src = buf;
+                        ctx.beginPath();
+                        ctx.arc(89, 199, 80, 0, Math.PI*2, true); 
+                        ctx.closePath();
+                        ctx.clip();
+                        ctx.drawImage(ava, 9, 120, 160, 160);
+                         
+     message.channel.sendFile(canvas.toBuffer())
+
+
+
+})
+})
+
+}
+});
+
+
+
+let log = client.channels.get('443674924679168011');
+client.on("guildBanRemove", (guild,user) => {
+  let embed = new Discord.RichEmbed()
+  .setTitle(`لوق جديد`)
+  .addField(`اللوق : `, `فك الباند`)
+  .setColor('RANDOM')
+  .addField(`تم فك الباند من : `, `${user.tag} \n\ ${user.id}`)
+  if (log) {log.send(embed)}
+})
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
