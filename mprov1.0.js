@@ -1585,51 +1585,62 @@ client.on('message', message => {
 
 
 
-
-
-
-
-  client.on('message' , async (message) => {
-var prefix = "#"
-    if(message.content.startsWith(prefix + "topinv")) {
-if(message.author.bot) return;
-if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
-  var invites = await message.guild.fetchInvites();
-    invites = invites.array();
-    arraySort(invites, 'uses', { reverse: true });
-    let possibleInvites = ['User Invited |  Uses '];
-    invites.forEach(i => {
-        if (i.uses === 0) { 
-            return;
-        }
-      possibleInvites.push(['\n\ ' +'<@'+ i.inviter.id +'>' + '  :  ' +   i.uses]);
-      if (i.uses === 10) {//يمديك تعدل رقم وصول العدد حق الانفايت الى اأقل أو أكثر
-          message.member.addRole(message.member.guild.roles.find("name",""))//هنآ أسم ألرتبه اللي تجيهه
-.catch(RebeL =>{
-console.log('`Error`: ' + RebeL);
+client.on('message', async message => {
+  if(message.content.startsWith(prefix + "setvoiceonline")) {
+  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply(':x: **ليس لديك الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply(':x: **ليس معي الصلاحيات الكافية**');
+  var args = message.content.split(' ').slice(1).join(' ');
+  if(args && !args.includes(0)) return message.channel.send(':negative_squared_cross_mark: » **يجب ان تغير اسم الروم الى 0**');
+  if(!args) args = `VoiceOnline: [ ${message.guild.members.filter(s => s.voiceChannel).size} ]`;
+  message.channel.send(':white_check_mark: » تم عمل الروم الصوتي بنجاح');
+  message.guild.createChannel(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`, 'voice').then(c => {
+    c.overwritePermissions(message.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`).catch(err => {
+        if(err) return;
+      });
+    },3000);
+  });
+  }
 });
-}
-if (i.uses === 20) {
-message.member.addRole(message.member.guild.roles.find("name",""))
-.catch(RebeL =>{
-console.log('`Error`: ' + RebeL);
-});
-}
-if (i.uses === 30) {
-message.member.addRole(message.member.guild.roles.find("name",""))
-.catch(RebeL =>{
-console.log('`Error`: ' + RebeL);
-});
-      }//معلومه بسيطه يمديك تكرر العمليهه أكثر من مره
-    })
-    const embed = new Discord.RichEmbed()
- .setColor('#36393e')
-    .addField("Top Invites." ,`${(possibleInvites)}`)
 
-    message.channel.send(embed)
+var userData = {};
+client.on("message", function(message){
+if (message.content.startsWith(prefix + "rank")) {
+    if (!userData[message.author.id]) {
+        userData[message.author.id] = {Money:0,Xp:0,Level:0}
     }
+     var mentionned = message.mentions.users.first();
+
+      var epic;
+      if(mentionned){
+          var epic = mentionned;
+      } else {
+          var epic = message.author;
+
+      }
+
+    
+    var CulLevel = Math.floor(0.25 * Math.sqrt(userData[message.author.id].Xp +1));
+    if (CulLevel > userData[message.author.id].Level) {userData[message.author.id].Level +=CulLevel}
+    let epic = new Discord.RichEmbed()
+    .setColor("Random")
+    .addField("الأسم :", message.author.tag)
+    .addField("الليفل :", userData[message.author.id].Level)
+    .addField("الأكس بي :",Math.floor(userData[message.author.id].Xp))
+    message.channel.send(epic);
+}
+if (!userData[message.author.id]) {
+    userData[message.author.id] = {Money:0,Xp:0,Level:0,Like:0}
+    }
+
+userData[message.author.id].Xp+= 0.25;
+userData[message.author.id].Money+= 0.25;
+
 });
-  
 
 
 client.login(process.env.BOT_TOKEN);
