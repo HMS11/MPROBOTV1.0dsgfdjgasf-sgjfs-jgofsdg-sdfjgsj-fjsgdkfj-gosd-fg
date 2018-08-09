@@ -1698,7 +1698,7 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
 
 
 
-const streamOptions = { seek : 0, volume : 20}
+const streamOptions = { seek : 0, volume : 0.20}
 client.on('voiceStateUpdate', (oldMember, newMember) => {
         let newUserChannel = newMember.voiceChannel
         let oldUserChannel = oldMember.voiceChannel
