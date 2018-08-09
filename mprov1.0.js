@@ -2137,7 +2137,7 @@ const w = ['./ID1.png','./ID2.png','./ID3.png','./ID4.png',];
 
 
 
-let log = client.channels.get('443674924679168011');
+let log = client.channels.get('476996290253815809');
 client.on("guildBanRemove", (guild,user) => {
   let embed = new Discord.RichEmbed()
   .setTitle(`لوق جديد`)
@@ -2145,7 +2145,6 @@ client.on("guildBanRemove", (guild,user) => {
   .setColor('RANDOM')
   .addField(`تم فك الباند من : `, `${user.tag} \n\ ${user.id}`)
   if (log) {log.send(embed)}
-})
 
 });
 
