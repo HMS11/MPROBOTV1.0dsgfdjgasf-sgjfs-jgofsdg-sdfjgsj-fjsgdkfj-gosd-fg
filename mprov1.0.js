@@ -2147,7 +2147,7 @@ client.on("guildBanRemove", (guild,user) => {
   if (log) {log.send(embed)}
 })
 
-
+});
 
 
 
