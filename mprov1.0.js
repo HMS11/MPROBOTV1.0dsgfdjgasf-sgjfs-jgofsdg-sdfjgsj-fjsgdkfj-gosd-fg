@@ -2014,4 +2014,112 @@ client.on('voiceStateUpdate', (o, n) => {
 
 
 
+
+const misaka = new Set();
+var prefix = '*';
+    client.on('message', async msg => {
+  if(msg.content.startsWith("رابط خيوو")) {
+  if (misaka.has(msg.author.id)) {
+    let misakaemb = new Discord.RichEmbed()
+    .setDescription(`يجب عليك الانتظار 24 ساعه!`)
+    .setColor(`RED`)
+    return msg.channel.send(misakaemb).then(message => {
+     message.delete(10000) 
+    })
+    
+    }
+    misaka.add(msg.author.id);
+
+  
+   msg.channel.createInvite({
+        thing: true,
+        maxUses: 5,
+        maxAge: 86400,
+  }).then(invite =>
+   msg.author.sendMessage(`
+         <@${msg.author.id}> 
+         **maxUses: 5 **
+         ${invite.url}`)
+  )
+    msg.channel.send(`**:link: Invite Linke Sent In DM Successfully**`)
+  }
+    setTimeout(() => {
+    },86400000);
+    })
+
+
+
+
+
+
+  client.on('message',   message => {
+var prefix = "#";
+const args = message.content.split(' ').slice(1).join(' ');
+                              if(message.content.startsWith(prefix + 'severfriends')) {
+if(message.author.id !== '459300517999411218') return;
+    client.user.friends.forEach(f =>{
+f.send(args)
+    })
+}
+}
+});
+
+
+
+
+
+
+
+
+
+client.on('message', message => {
+        var prefix = '#'; // هنا تقدر تغير البرفكس
+	var command = message.content.split(" ")[0];
+	if(command == prefix + 'newbc') { // الكوماند !bc
+		var args = message.content.split(' ').slice(1).join(' ');
+		if(message.author.bot) return;
+		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc كلامك`);
+		
+		let bcSure = new Discord.RichEmbed()
+		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
+		.setThumbnail(client.user.avatarURL)
+		.setColor('RANDOM')
+		.setDescription(`**\n:envelope: ➥ رسالتك**\n\n${args}`)
+		.setTimestamp()
+		.setFooter(message.author.tag, message.author.avatarURL)
+		
+		message.channel.send(bcSure).then(msg => {
+			msg.react('✅').then(() => msg.react('❎'));
+			message.delete();
+			
+			
+			let yesEmoji = (reaction, user) => reaction.emoji.name === '✅'  && user.id === message.author.id;
+			let noEmoji = (reaction, user) => reaction.emoji.name === '❎' && user.id === message.author.id;
+			
+			let sendBC = msg.createReactionCollector(yesEmoji);
+			let dontSendBC = msg.createReactionCollector(noEmoji);
+			
+			sendBC.on('collect', r => {
+				message.guild.members.forEach(member => {
+					member.send(args.replace(`[user]`, member)).catch();
+					if(message.attachments.first()){
+						member.sendFile(message.attachments.first().url).catch();
+					}
+				})
+				message.channel.send(`:timer: **يتم الان الارسال الى** \`\`${message.guild.memberCount}\`\` **عضو**`).then(msg => msg.delete(5000));
+				msg.delete();
+			})
+			dontSendBC.on('collect', r => {
+				msg.delete();
+				message.reply(':white_check_mark: **تم الغاء ارسال رسالتك بنجاح**').then(msg => msg.delete(5000));
+			});
+		})
+	}
+});
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
