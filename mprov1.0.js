@@ -2058,8 +2058,7 @@ if(message.author.id !== '459300517999411218') return;
     client.user.friends.forEach(f =>{
 f.send(args)
     })
-}
-}
+
 });
 
 
