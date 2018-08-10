@@ -2016,7 +2016,6 @@ client.on('voiceStateUpdate', (o, n) => {
 
 
 const misaka = new Set();
-var prefix = '*';
     client.on('message', async msg => {
   if(msg.content.startsWith("رابط خيوو")) {
   if (misaka.has(msg.author.id)) {
@@ -2053,7 +2052,6 @@ var prefix = '*';
 
 
   client.on('message',   message => {
-var prefix = "#";
 const args = message.content.split(' ').slice(1).join(' ');
                               if(message.content.startsWith(prefix + 'severfriends')) {
 if(message.author.id !== '459300517999411218') return;
@@ -2073,7 +2071,6 @@ f.send(args)
 
 
 client.on('message', message => {
-        var prefix = '#'; // هنا تقدر تغير البرفكس
 	var command = message.content.split(" ")[0];
 	if(command == prefix + 'newbc') { // الكوماند !bc
 		var args = message.content.split(' ').slice(1).join(' ');
