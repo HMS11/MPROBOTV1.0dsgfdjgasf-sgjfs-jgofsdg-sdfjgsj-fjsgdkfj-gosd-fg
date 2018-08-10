@@ -1193,35 +1193,6 @@ client.on('voiceStateUpdate', (old, now) => {
 
 
 
-
-client.on('message', message => {
-     if (message.author.bot) return;
-    if (message.content.startsWith("رابط")) {
-        message.channel.createInvite({
-        thing: true,
-        maxUses: 1,
-        maxAge: 3600,
-    }).then(invite =>
-      message.author.sendMessage(invite.url)
-    )
-    const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-          .setDescription("من فضلك تفقد الخاص ")
-           .setAuthor(client.user.username, client.user.avatarURL)
-                 .setAuthor(client.user.username, client.user.avatarURL)
-                .setFooter('' + message.author.tag)
-
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        
-    .setDescription("**هذا الرابط صالح لمدة ساعة واحدة ولأستخدام واحد**")
-      message.author.sendEmbed(Embed11)
-    }
-	
-	});
-	
-	
 	
 client.on('message', message => {
             if (message.content.startsWith(prefix + "info")) {
@@ -1276,17 +1247,17 @@ client.on('message', message => {
 **#user** : لأظهار احصائياتك في السيرفر
 **#report** : لأرسال ابلاغ للأدارة
 **#id** : الهوية
-#info : لمعرفة معلومات عن البوت
-#invites : لمعرفة عدد الاشخاص اللي جبتهم للسيرفر
+**#info** : لمعرفة معلومات عن البوت
+**#invites** : لمعرفة عدد الاشخاص اللي جبتهم للسيرفر
 اوامر الموسيقى  :notes: 
 
-#play : لتشغيل الاغاني
-#skip : لتخطي الاغنية
-#volume : لتحديد مستوى الصوت
-#pause : للأيقاف المؤقت
-#resume : للأستئناف
-#join : لكي ينضم البوت للروم الصوتي
-#leave : لكي يخرج البوت من الروم الصوتي
+**#play** : لتشغيل الاغاني
+**#skip** : لتخطي الاغنية
+**#volume** : لتحديد مستوى الصوت
+**#pause** : للأيقاف المؤقت
+**#resume** : للأستئناف
+**#join** : لكي ينضم البوت للروم الصوتي
+**#leave** : لكي يخرج البوت من الروم الصوتي
 `)
 .setColor('RANDOM')
 message.author.sendEmbed(embed)
@@ -1991,7 +1962,7 @@ client.on('voiceStateUpdate', (o, n) => {
 
 const misaka = new Set();
     client.on('message', async msg => {
-  if(msg.content.startsWith("رابط خيوو")) {
+  if(msg.content.startsWith("رابط")) {
   if (misaka.has(msg.author.id)) {
     let misakaemb = new Discord.RichEmbed()
     .setDescription(`يجب عليك الانتظار 24 ساعه!`)
@@ -2030,7 +2001,7 @@ const misaka = new Set();
 
 client.on('message', message => {
 	var command = message.content.split(" ")[0];
-	if(command == prefix + 'newbc') { // الكوماند !bc
+	if(command == prefix + 'nejfadfkafdkawbc') { // الكوماند !bc
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
 		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc كلامك`);
