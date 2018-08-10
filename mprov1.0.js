@@ -1961,7 +1961,7 @@ mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${arg
 
 
 client.on("channelCreate",  cc => {
-  const channel = cc.guild.channels.find("name", "log")
+  const channel = dc.guild.channels.find("name", "log")
   if(channel) {
   var embed = new Discord.RichEmbed()
   .setTitle(cc.guild.name)
