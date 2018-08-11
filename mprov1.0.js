@@ -2048,4 +2048,36 @@ client.on('message', message => {
 
 
 
+
+
+
+
+
+
+client.on("ready", async  => {
+setInterval(function(){
+client.channels.find('id', '477793187306668032').setName("C");
+client.channels.find('id', '477793187306668032').setName("Ci");
+client.channels.find('id', '477793187306668032').setName("Cil");
+client.channels.find('id', '477793187306668032').setName("Cilę");
+client.channels.find('id', '477793187306668032').setName("Cilęo");
+client.channels.find('id', '477793187306668032').setName("Cilęo,");
+client.channels.find('id', '477793187306668032').setName("Cilęo,S");
+client.channels.find('id', '477793187306668032').setName("Cilęo,Se");
+client.channels.find('id', '477793187306668032').setName("Cilęo,Ser");
+client.channels.find('id', '477793187306668032').setName("Cilęo,Serv");
+client.channels.find('id', '477793187306668032').setName("Cilęo,Serve");
+client.channels.find('id', '477793187306668032').setName("Cilęo,Server");
+  }, 3000);
+});
+
+
+
+
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
