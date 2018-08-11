@@ -2075,9 +2075,6 @@ client.channels.find('id', '477793187306668032').setName("Cilęo,Server");
 
 
 
-
-	const Discord = require('discord.js');
-	const client = new Discord.Client()
 let profile = JSON.parse(fs.readFileSync("./profile.json", "utf8"))
 client.on("message", message => {
   if (message.author.bot) return;
