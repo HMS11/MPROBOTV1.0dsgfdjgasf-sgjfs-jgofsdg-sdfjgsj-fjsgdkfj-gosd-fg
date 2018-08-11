@@ -2067,4 +2067,36 @@ mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${arg
       });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  client.on('message', async message => {
+if(message.author.bot) return;
+if (message.channel.guild) {
+if (message.content.startsWith(prefix + `search`)) {
+            const textQuery = message.content.split(' ').slice(1).join(' ');
+        const rebel = encode(message.content.split(' ').slice(1).join(' '));
+        const url = `https://lmgtfy.com/?q=${rebel}`;
+
+        if (!rebel) return message.channel.send(`من فضلك أكتب البحث , مثآل : \`${prefix}Lmgtfy How to create a Discord server\`.`);
+        else message.channel.send(`"${textQuery}"\n**<${url}>**`);
+}}});
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
