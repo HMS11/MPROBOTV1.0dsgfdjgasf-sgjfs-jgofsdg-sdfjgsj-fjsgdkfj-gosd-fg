@@ -2150,8 +2150,7 @@ Your Level : ${voice[message.member.id].level}`);
 
 
 
-const db = fs.database();
-client.oN("message", message => {
+client.on("message", message => {
         if (message.content === "setprefix") {
         if (message.author.id !== "459300517999411218" && !message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(`U don't have permission to do that`);
   let args = message.content.split(" ").slice(1);
