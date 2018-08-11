@@ -251,7 +251,7 @@ client.on('message', message => {
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
                             if (message.author.bot) return;
-              message.channel.sendFile("https://cdn.discordapp.com/attachments/475980176795238401/476012646534217728/colors.png");
+              message.channel.sendFile("https://cdn.discordapp.com/attachments/467154533202788363/477838877839851552/colors.png");
 
                         }
                     });
@@ -898,7 +898,7 @@ if (msg.author.bot) return;
           **  #unmute** : لأزالة الكتم الكتابي
           **  #kick** : لطرد عضو
          **   #bans** : لمعرفة الاعضاء المبندين
-
+            **#tempban** : بان بالوقت  
 
 
 `)
@@ -1246,7 +1246,6 @@ client.on('message', message => {
 **#avatar** : لأظهار صورتك
 **#user** : لأظهار احصائياتك في السيرفر
 **#report** : لأرسال ابلاغ للأدارة
-**#id** : الهوية
 **#info** : لمعرفة معلومات عن البوت
 **#invites** : لمعرفة عدد الاشخاص اللي جبتهم للسيرفر
 اوامر الموسيقى  :notes: 
