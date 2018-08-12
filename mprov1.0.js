@@ -130,7 +130,7 @@ var unmuteembeddm = new Discord.RichEmbed()
 
 
 
-const developers = ["459300517999411218","389136174154907651",""]
+const developers = ["459300517999411218","389136174154907651","353760389747441665"]
 const adminprefix = "#";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
