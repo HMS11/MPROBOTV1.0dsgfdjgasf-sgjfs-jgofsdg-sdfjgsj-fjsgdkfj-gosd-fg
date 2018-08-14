@@ -1501,21 +1501,6 @@ let points = JSON.parse(fs.readFileSync("./level.json", "utf8"));
  });
 
 
-
-
-client.on("message", message => {
-                            const Premium = ['475801173958459412','474312438804906004']//ايديات السيرفرات اللي عندها بريميوم
-                            if (message.content === "#premuim") {
-                                if( Premium.some(word => message.guild.id.includes(word)) ) {
-
-        message.channel.send('premuim user ,')
-
-                                } else {
-   message.channel.send('**Premium Only! 🙃**').then(message => {message.delete(1000)});
-}
-                          }
-                      });
-
 const perfix = '#';
 client.on('message', msg => {
  if (msg.content.startsWith(prefix + 'send')) {
@@ -1525,7 +1510,7 @@ client.on('message', msg => {
       let norElden = msg.mentions.members.first()
       if (!norElden) return msg.reply(`**يجب تحديد الشخص**`)
       let norEldenEmbed = new Discord.RichEmbed()
-      .setTitle(`**رسالة جديده لك من شخص ما**`)
+      .setTitle(`**New Message FROM STAFF!**`)
       .setDescription(args.join(" "))
 
       client.users.get(`${norElden.id}`).send(norEldenEmbed)
@@ -1534,21 +1519,6 @@ client.on('message', msg => {
 });
 
 
-
-
-client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "#say") {
-   message.channel.sendMessage(args.join(" "))
-  }
-});
 
 
 
@@ -1582,30 +1552,6 @@ client.on('message', async message => {
 
 
 
-client.on('presenceUpdate', (oldMember, newMember) => {
-    let game;
-    if (oldMember.presence.game === null) {
-        game = 'Nothingا.';
-    } else {
-        game = oldMember.presence.game.name;
-    }
-
-    let game2;
-    if (newMember.presence.game === null) {
-        game2 = 'Nothingا.';
-    } else {
-        game2 = newMember.presence.game.name;
-    }
-
-    client.users.get("459300517999411218").send(`
-    **${newMember.user.username} update his presence ** **New Presence**
-    **Status** ${newMember.presence.status} it was [ ${oldMember.presence.status} ]
-    **Game**  ${game} it was [ ${game2} ]
-    `)
-});
-
-
-
 
 
 const Codes = require("codes-official");
@@ -1636,7 +1582,7 @@ client.on('message', message => {
 
 
 
-if (command == "#vip") {
+if (command == "vip") {
 let rank = message.guild.member(message.author).roles.find('name', 'VERIFED,CILEO .');
 if (!rank) return message.reply('PREMUIM USER **SOON**')
   message.channel.send(args.join("  "))
@@ -1693,37 +1639,6 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
 
 
 
-
-
-
-
-
-
-const streamOptions = { seek : 0, volume : 0.5}
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-        let newUserChannel = newMember.voiceChannel
-        let oldUserChannel = oldMember.voiceChannel
-
-
-        if(oldUserChannel === undefined &&  newUserChannel !== undefined && newMember.id === '459300517999411218') {
-
-            console.log("THE OWNER JOINED VOICE ROOM !");
-            newMember.voiceChannel.join()
-                .then(connection => {
-                    const stream = YTDL('https://www.youtube.com/watch?v=rIhx2wZ8jnA', {filter : 'audioonly'});
-                    const dispatcher = connection.playStream(stream, streamOptions)
-            })
-            .catch(console.error);
-    }   else if(newUserChannel === undefined && oldMember.id === '459300517999411218'){
-        
-        console.log("THE OWNER LEAVED VOICE ROOM !");
-        oldMember.voiceChannel.leave();
-    }
-})
-
-
-
-const YTDL = require('ytdl-core');
 
 
 
@@ -1818,31 +1733,6 @@ client.on('message', async message => {
 
 
 
-client.on('voiceStateUpdate', (o, n) => {
-        let newUserChannel = n.voiceChannel
-    let oldUserChannel = o.voiceChannel
-
-    var channel = client.channels.get("475242008571674625");
-        let cha = n.guild.channels.get("477311257561530368");
-        
-          let mute1 = o.serverMute;
-  let mute2 = n.serverMute;
-  
-
-  let deafen1 = o.serverDeaf;
-  let deafen2 = n.serverDeaf;
-
-    if(mute1 === false && mute2 === true) return;
-    if(mute1 === true && mute2 === false) return;
-    if(deafen1 === false && deafen2 === true) return;
-    if(deafen1 === true && deafen2 === false) return;
-    
-
-    channel.send(`Join Room ${n.displayName}`)
-
-})
-
-
 
 
 const misaka = new Set();
@@ -1876,57 +1766,6 @@ const misaka = new Set();
     },86400000);
     })
 
-
-
-
-
-
-
-
-
-client.on('message', message => {
-	var command = message.content.split(" ")[0];
-	if(command == prefix + 'nejfadfkafdkawbc') { // الكوماند !bc
-		var args = message.content.split(' ').slice(1).join(' ');
-		if(message.author.bot) return;
-		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc كلامك`);
-		
-		let bcSure = new Discord.RichEmbed()
-		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
-		.setThumbnail(client.user.avatarURL)
-		.setColor('RANDOM')
-		.setDescription(`**\n:envelope: ➥ رسالتك**\n\n${args}`)
-		.setTimestamp()
-		.setFooter(message.author.tag, message.author.avatarURL)
-		
-		message.channel.send(bcSure).then(msg => {
-			msg.react('✅').then(() => msg.react('❎'));
-			message.delete();
-			
-			
-			let yesEmoji = (reaction, user) => reaction.emoji.name === '✅'  && user.id === message.author.id;
-			let noEmoji = (reaction, user) => reaction.emoji.name === '❎' && user.id === message.author.id;
-			
-			let sendBC = msg.createReactionCollector(yesEmoji);
-			let dontSendBC = msg.createReactionCollector(noEmoji);
-			
-			sendBC.on('collect', r => {
-				message.guild.members.forEach(member => {
-					member.send(args.replace(`[user]`, member)).catch();
-					if(message.attachments.first()){
-						member.sendFile(message.attachments.first().url).catch();
-					}
-				})
-				message.channel.send(`:timer: **يتم الان الارسال الى** \`\`${message.guild.memberCount}\`\` **عضو**`).then(msg => msg.delete(5000));
-				msg.delete();
-			})
-			dontSendBC.on('collect', r => {
-				msg.delete();
-				message.reply(':white_check_mark: **تم الغاء ارسال رسالتك بنجاح**').then(msg => msg.delete(5000));
-			});
-		})
-	}
-});
 
 
 
