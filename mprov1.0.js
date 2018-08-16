@@ -1945,7 +1945,27 @@ const weather = require('weather-js');
 
 
 
-
+const jackeo = ['459300517999411218' , '' , '' , '']; //Jackeo  حقوقي
+client.on('message', message => { //Jackeo  حقوقي
+var prefix = "#"; //Jackeo  حقوقي
+  if (message.author.bot) return; //Jackeo  حقوقي
+  if (!message.content.startsWith(prefix)) return; //Jackeo  حقوقي
+    var argresult = message.content.split(` `).slice(1).join(' '); //Jackeo  حقوقي
+      if (!jackeo.includes(message.author.id)) return; //Jackeo  حقوقي
+  let command = message.content.split(" ")[0]; //Jackeo  حقوقي
+  command = command.slice(prefix.length); //Jackeo  حقوقي
+ //Jackeo  حقوقي  //Jackeo  حقوقي  //Jackeo  حقوقي  //Jackeo  حقوقي
+  let args = message.content.split(" ").slice(1);  //Jackeo  حقوقي
+ //Jackeo  حقوقي  //Jackeo  حقوقي  //Jackeo  حقوقي  //Jackeo  حقوقي
+if (command == "emb")    { //Jackeo  حقوقي
+  if(!message.channel.guild) return message.reply('** :stop_button: **'); //Jackeo  حقوقي
+    let say = new Discord.RichEmbed() //Jackeo  حقوقي
+    .setDescription(args.join("  ")) //Jackeo  حقوقي
+    .setColor("RANDOM") //Jackeo  حقوقي
+    message.channel.sendEmbed(say); //Jackeo  حقوقي
+    message.delete(); //Jackeo  حقوقي
+  } //Jackeo  حقوقي 
+});
 
 
 
@@ -1962,7 +1982,7 @@ client.on('message', async message =>{
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
   let sicon = message.author.displayAvatarURL;
-  if(cmd === `what is my id`) {
+  if(cmd === `whatismyid`) {
       var bots = new Discord.RichEmbed()
 
       .setDescription(`** Your id✨ : ${message.author.id}  **`)
